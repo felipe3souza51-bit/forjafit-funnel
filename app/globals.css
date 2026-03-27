@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-text antialiased;
+  background-image: radial-gradient(circle at top, rgba(124,255,101,0.12), transparent 28%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-6xl px-4;
+}
+
+.card {
+  @apply rounded-3xl border border-line bg-card/90 shadow-glow backdrop-blur;
+}
+
+.section-title {
+  @apply text-2xl font-bold leading-tight md:text-4xl;
+}
+
+.section-copy {
+  @apply text-sm leading-6 text-muted md:text-base;
+}
+
+.cta-primary {
+  @apply inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-center text-sm font-semibold text-slate-950 transition hover:scale-[1.01] hover:bg-primaryDark;
+}
+
+.cta-secondary {
+  @apply inline-flex min-h-12 items-center justify-center rounded-full border border-line px-6 py-3 text-center text-sm font-semibold text-text transition hover:border-primary;
+}
