@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 export default function CheckoutBridgePage() {
@@ -208,14 +207,6 @@ export default function CheckoutBridgePage() {
           </p>
         </div>
 
-        <div style={{ marginTop: '24px' }}>
-          <Link
-            href="/obrigado"
-            style={{ color: '#22C55E', textDecoration: 'none' }}
-          >
-            Página de obrigado (teste)
-          </Link>
-        </div>
       </div>
     </main>
   );
