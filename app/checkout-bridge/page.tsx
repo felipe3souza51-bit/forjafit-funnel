@@ -4,7 +4,13 @@ import { useSearchParams } from 'next/navigation';
 
 export default function CheckoutBridgePage() {
   const searchParams = useSearchParams();
-  const perfil = searchParams.get('perfil') || '';
+  const perfilParam = searchParams.get('perfil');
+  const perfil =
+    perfilParam === 'recomeco' ||
+    perfilParam === 'emagrecimento' ||
+    perfilParam === 'evolucao'
+      ? perfilParam
+      : 'emagrecimento';
 
   let titulo = 'Você está a um passo de começar';
   let subtitulo =
