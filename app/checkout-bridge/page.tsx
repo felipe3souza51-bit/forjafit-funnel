@@ -1,9 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { appendStoredUtm } from '@/lib/storage';
 
 export default function CheckoutBridgePage() {
   const searchParams = useSearchParams();
+  const checkoutBaseUrl = 'https://checkout.ticto.app/O151D598F?pid=AFCA5C514F';
+  const [checkoutUrl, setCheckoutUrl] = useState(checkoutBaseUrl);
   const perfilParam = searchParams.get('perfil');
   const perfil =
     perfilParam === 'recomeco' ||
@@ -11,6 +15,20 @@ export default function CheckoutBridgePage() {
     perfilParam === 'evolucao'
       ? perfilParam
       : 'emagrecimento';
+
+  useEffect(() => {
+    const nextUrl = new URL(appendStoredUtm(checkoutBaseUrl));
+
+    nextUrl.searchParams.set('perfil', perfil);
+
+    searchParams.forEach((value, key) => {
+      if (key.startsWith('utm_') && value) {
+        nextUrl.searchParams.set(key, value);
+      }
+    });
+
+    setCheckoutUrl(nextUrl.toString());
+  }, [checkoutBaseUrl, perfil, searchParams]);
 
   let titulo = 'Você está a um passo de começar';
   let subtitulo =
@@ -185,7 +203,7 @@ export default function CheckoutBridgePage() {
           }}
         >
           <a
-            href="https://checkout.ticto.app/O151D598F?pid=AFCA5C514F"
+            href={checkoutUrl}
             target="_blank"
             rel="noreferrer"
             style={{
