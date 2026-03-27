@@ -1231,7 +1231,7 @@ export default function OfertaPage() {
           inset: 0;
           background:
             linear-gradient(180deg, rgba(5, 8, 22, 0.12), rgba(5, 8, 22, 0.62)),
-            url('/transformação.jpg.png');
+            url('/transformacao.jpg');
           background-size: cover;
           background-position: center top;
           filter: saturate(0.95) contrast(1.02);
@@ -1327,7 +1327,7 @@ export default function OfertaPage() {
         .state-image-before {
           background:
             linear-gradient(180deg, rgba(5, 8, 22, 0.1), rgba(5, 8, 22, 0.5)),
-            url('/Antes.jpg.png');
+            url('/antes.jpg');
           background-size: cover;
           background-position: center;
         }
@@ -1335,7 +1335,7 @@ export default function OfertaPage() {
         .state-image-after {
           background:
             linear-gradient(180deg, rgba(5, 8, 22, 0.08), rgba(5, 8, 22, 0.38)),
-            url('/Depois.pjg.jpg');
+            url('/depois.jpg');
           background-size: cover;
           background-position: center;
         }
