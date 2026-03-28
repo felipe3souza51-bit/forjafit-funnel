@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { pushEvent } from '@/lib/gtm';
 
 const perguntas = [
   {
@@ -70,6 +71,10 @@ export default function QuizPage() {
   const router = useRouter();
   const [etapa, setEtapa] = useState(0);
   const [respostas, setRespostas] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    pushEvent('view_quiz');
+  }, []);
 
   const perguntaAtual = perguntas[etapa];
   const progresso = ((etapa + 1) / perguntas.length) * 100;
