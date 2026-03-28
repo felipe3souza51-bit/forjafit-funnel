@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { pushEvent } from '@/lib/gtm';
 
 export default function AnuncioPreviewPage() {
   return (
@@ -12,6 +13,7 @@ export default function AnuncioPreviewPage() {
 
       <Link
         href="/quiz"
+        onClick={() => pushEvent('quiz_start')}
         style={{
           display: 'inline-block',
           marginTop: '20px',
