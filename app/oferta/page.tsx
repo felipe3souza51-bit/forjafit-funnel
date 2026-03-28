@@ -1327,7 +1327,7 @@ function OfertaContent() {
         .state-image-before {
           background:
             linear-gradient(180deg, rgba(5, 8, 22, 0.1), rgba(5, 8, 22, 0.5)),
-            url('/antes.jpg');
+            url('/antes.png');
           background-size: cover;
           background-position: center;
         }
@@ -1335,7 +1335,7 @@ function OfertaContent() {
         .state-image-after {
           background:
             linear-gradient(180deg, rgba(5, 8, 22, 0.08), rgba(5, 8, 22, 0.38)),
-            url('/depois.jpg');
+            url('/depois.png');
           background-size: cover;
           background-position: center;
         }
