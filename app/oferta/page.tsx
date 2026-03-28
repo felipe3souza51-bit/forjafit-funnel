@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 type ProfileContent = {
@@ -177,7 +177,7 @@ const profiles: Record<string, ProfileContent> = {
   },
 };
 
-export default function OfertaPage() {
+function OfertaContent() {
   const searchParams = useSearchParams();
   const perfilParam = searchParams.get('perfil') || 'emagrecimento';
 
@@ -1689,5 +1689,13 @@ export default function OfertaPage() {
         }
       `}</style>
     </main>
+  );
+}
+
+export default function OfertaPage() {
+  return (
+    <Suspense fallback={null}>
+      <OfertaContent />
+    </Suspense>
   );
 }

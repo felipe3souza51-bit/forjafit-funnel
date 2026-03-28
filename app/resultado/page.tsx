@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function ResultadoPage() {
+function ResultadoContent() {
   const searchParams = useSearchParams();
 
   const objetivo = searchParams.get('objetivo') || '';
@@ -219,5 +220,13 @@ export default function ResultadoPage() {
         </Link>
       </div>
     </main>
+  );
+}
+
+export default function ResultadoPage() {
+  return (
+    <Suspense fallback={null}>
+      <ResultadoContent />
+    </Suspense>
   );
 }

@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { appendStoredUtm } from '@/lib/storage';
 
-export default function CheckoutBridgePage() {
+function CheckoutBridgeContent() {
   const searchParams = useSearchParams();
   const checkoutBaseUrl = 'https://checkout.ticto.app/O151D598F?pid=AFCA5C514F';
   const [checkoutUrl, setCheckoutUrl] = useState(checkoutBaseUrl);
@@ -233,5 +233,13 @@ export default function CheckoutBridgePage() {
 
       </div>
     </main>
+  );
+}
+
+export default function CheckoutBridgePage() {
+  return (
+    <Suspense fallback={null}>
+      <CheckoutBridgeContent />
+    </Suspense>
   );
 }
