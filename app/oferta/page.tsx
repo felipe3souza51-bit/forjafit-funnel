@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Suspense, useMemo } from 'react';
+import { Suspense, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { pushEvent } from '@/lib/gtm';
 
 type ProfileContent = {
   heroBadge: string;
@@ -180,6 +181,10 @@ const profiles: Record<string, ProfileContent> = {
 function OfertaContent() {
   const searchParams = useSearchParams();
   const perfilParam = searchParams.get('perfil') || 'emagrecimento';
+
+  useEffect(() => {
+    pushEvent('view_oferta');
+  }, []);
 
   const content = useMemo(() => {
     return profiles[perfilParam] || profiles.emagrecimento;
