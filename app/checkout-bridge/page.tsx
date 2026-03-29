@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { appendStoredUtm } from '@/lib/storage';
+import { pushEvent } from '@/lib/gtm';
 
 function CheckoutBridgeContent() {
   const searchParams = useSearchParams();
@@ -204,6 +205,7 @@ function CheckoutBridgeContent() {
         >
           <a
             href={checkoutUrl}
+            onClick={() => pushEvent('click_checkout')}
             target="_blank"
             rel="noreferrer"
             style={{
