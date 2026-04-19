@@ -1,0 +1,1564 @@
+﻿# Forja Fit â€” CLAUDE.md
+
+## MissÃ£o
+Transformar a pÃ¡gina `/oferta` do Forja Fit em uma experiÃªncia premium de convicÃ§Ã£o + decisÃ£o, com alta clareza comercial, forte percepÃ§Ã£o de valor e execuÃ§Ã£o visual sofisticada, sem perder performance, responsividade ou foco em conversÃ£o.
+
+## Verdades fixas do projeto
+- Avatar central: recomeÃ§ador frustrado
+- Tese central: o problema nÃ£o Ã© falta de disciplina; Ã© comeÃ§ar desalinhado
+- Mecanismo visÃ­vel: Mapa de ProgressÃ£o Inicial Forja Fit
+- VariÃ¡veis centrais do mecanismo:
+  - objetivo real
+  - nÃ­vel atual
+  - rotina possÃ­vel
+- A pÃ¡gina precisa vender, nÃ£o virar arte vazia
+- O visual existe para reforÃ§ar a mensagem
+- CTA, clareza e hierarquia mandam na experiÃªncia
+
+## Papel da pÃ¡gina /oferta
+A `/oferta` nÃ£o Ã© uma pÃ¡gina institucional.
+A `/oferta` nÃ£o Ã© uma VSL genÃ©rica.
+A `/oferta` Ã© uma pÃ¡gina de convicÃ§Ã£o + decisÃ£o.
+
+Ela precisa:
+1. instalar a nova crenÃ§a
+2. mostrar o mecanismo
+3. gerar percepÃ§Ã£o de direÃ§Ã£o e clareza
+4. transformar isso em desejo
+5. empurrar para checkout
+
+## O que jamais esquecer
+A sensaÃ§Ã£o final do usuÃ¡rio deve ser:
+â€œagora eu entendi por que sempre travei â€” e esse parece ser o jeito certo de recomeÃ§ar.â€
+
+## Prioridades absolutas
+1. Clareza da proposta
+2. DominÃ¢ncia da proposta Ãºnica acima da dobra
+3. Hierarquia visual forte
+4. CTA visÃ­vel cedo
+5. Mecanismo explicado cedo
+6. Layout alinhado
+7. Narrativa visual guiada
+8. Mobile limpo
+9. Performance boa
+10. ConversÃ£o acima de espetÃ¡culo
+
+## Regra central de execuÃ§Ã£o
+Nunca melhorar â€œbelezaâ€ sacrificando:
+- clareza
+- proposta
+- CTA
+- leitura
+- conversÃ£o
+- performance
+
+## Como trabalhar neste projeto
+- Primeiro analisar, depois implementar
+- Uma fase por vez
+- NÃ£o expandir escopo sem ordem explÃ­cita
+- Sempre propor a menor implementaÃ§Ã£o segura primeiro
+- Sempre preservar:
+  - tracking
+  - checkout
+  - lÃ³gica de URLs
+  - responsividade
+- Antes de mexer em motion, garantir:
+  - layout alinhado
+  - grid consistente
+  - composiÃ§Ã£o premium
+  - hierarquia clara
+
+## Ordem obrigatÃ³ria de execuÃ§Ã£o
+1. Layout e composiÃ§Ã£o
+2. Foundation visual
+3. Hero
+4. Narrativa estÃ¡tica
+5. Mechanism reveal
+6. Motion leve
+7. GSAP apenas se necessÃ¡rio
+8. Polish final
+9. QA comercial e tÃ©cnico
+
+## Regras de copy
+- Falar com o recomeÃ§ador frustrado
+- Evitar linguagem genÃ©rica e institucional
+- Evitar exagero fitness
+- Evitar promessa mÃ¡gica
+- ReforÃ§ar:
+  - o erro era o comeÃ§o desalinhado
+  - direÃ§Ã£o antes de intensidade
+  - progresso possÃ­vel
+  - plano que cabe na vida
+- Sempre que possÃ­vel, tornar explÃ­cito:
+  - o que Ã©
+  - para quem Ã©
+  - por que Ã© diferente
+  - qual Ã© o prÃ³ximo passo
+
+## Regras de design
+A interface deve parecer:
+- escura
+- sofisticada
+- precisa
+- profunda
+- premium funcional
+- levemente futurista
+- limpa
+- forte
+- sem cara gamer
+- sem cara de template fitness
+- sem poluiÃ§Ã£o visual
+
+## Regras de composiÃ§Ã£o
+- A proposta Ãºnica deve dominar a primeira dobra
+- O visual nunca pode competir com a headline
+- O CTA precisa ser identificado em menos de 1 segundo
+- Os mocks nunca podem liderar a cena se estiverem enfraquecendo a proposta
+- O hero precisa fechar como uma unidade
+- A pÃ¡gina precisa ter eixo, ritmo e respiro
+- NÃ£o criar blocos soltos com estilos bonitos e hierarquia fraca
+
+## Regras de motion
+- Motion sÃ³ entra para reforÃ§ar significado
+- Nada de movimento decorativo
+- Nada de movimento gamer
+- Nada de exagero
+- Mouse interaction sÃ³ para profundidade e vida
+- Scroll motion sÃ³ para narrativa
+- Mobile sempre com fallback leve
+- Preferir transform e opacity
+- Respeitar prefers-reduced-motion
+
+## Ferramentas e uso correto
+- Tailwind/CSS: layout, grid, spacing, tipografia, superfÃ­cies
+- Motion: reveals, parallax leve, transiÃ§Ãµes suaves, scroll progress simples
+- GSAP: apenas quando houver necessidade real de pin/scrub narrativo
+- Lottie: apenas para micro assets e pequenos detalhes
+- NÃ£o usar Lottie como motor principal da narrativa
+- NÃ£o usar WebGL global nesta fase
+
+## O que evitar
+- Visual bonito sem funÃ§Ã£o
+- Hero pesado que compete com a mensagem
+- Cards demais
+- Glow demais
+- Blur demais
+- Grid inconsistente
+- Muito peso visual em todos os blocos
+- SeÃ§Ãµes com a mesma hierarquia
+- CTA perdido
+- Mobile pesado
+- Arte abstrata demais
+- AlteraÃ§Ãµes amplas sem necessidade
+
+## Fontes de verdade do projeto
+Sempre ler antes de mudanÃ§as estruturais:
+- STRATEGY.md
+- OFFER_EXPERIENCE.md
+- SUPREME_INTERFACE_BLUEPRINT.md
+- UI_SYSTEM_FORJA.md
+- MOTION_SYSTEM_FORJA.md
+- OFERTA_STORYBOARD.md
+
+## Modo de trabalho esperado
+### Modo arquiteto
+Quando a tarefa nÃ£o estiver clara:
+1. analisar o estado atual
+2. identificar o principal problema
+3. propor a menor implementaÃ§Ã£o segura
+4. nÃ£o alterar arquivos ainda
+
+### Modo executor
+Quando a tarefa estiver aprovada:
+1. implementar apenas o escopo definido
+2. nÃ£o expandir escopo
+3. preservar o que nÃ£o foi autorizado mexer
+4. validar integridade da rota
+
+## Regras de resposta
+Antes de implementar:
+- dizer qual Ã© o principal problema
+- dizer qual Ã© a menor mudanÃ§a segura
+- dizer quais arquivos pretende alterar
+
+Depois de implementar:
+- listar arquivos alterados
+- resumir o que mudou
+- dizer o que testar no navegador
+- avisar qualquer risco ou limitaÃ§Ã£o restante
+
+## CritÃ©rio de sucesso
+A pÃ¡gina estÃ¡ correta quando:
+- parece premium sem parecer exagerada
+- comunica a proposta em poucos segundos
+- instala a nova crenÃ§a com clareza
+- mostra o mecanismo como sistema
+- mantÃ©m CTA dominante
+- flui com coerÃªncia visual
+- continua leve e legÃ­vel no mobile
+- faz o usuÃ¡rio sentir:
+  â€œesse Ã© o jeito certo de recomeÃ§arâ€
+# Forja Fit
+
+## Objetivo
+Melhorar pÃ¡ginas do site com foco em conversÃ£o, copy estratÃ©gica e design limpo.
+
+## Como o Codex deve trabalhar
+- Sempre analisar antes de alterar.
+- Fazer a menor mudanÃ§a segura primeiro.
+- Trabalhar uma pÃ¡gina por vez.
+- NÃ£o refazer o site inteiro sem ordem explÃ­cita.
+- Manter responsivo.
+- Preservar a estrutura existente sempre que possÃ­vel.
+- No final de cada tarefa, listar:
+  1. arquivos alterados
+  2. o que mudou
+  3. o que testar no navegador
+
+## Prioridades
+1. Clareza da oferta
+2. Hierarquia visual
+3. CTA visÃ­vel
+4. Copy orientada Ã  conversÃ£o
+5. Mobile first
+6. NÃ£o quebrar o que jÃ¡ funciona
+
+## Regras de copy e design
+- Evitar linguagem genÃ©rica e institucional.
+- Destacar o mecanismo Ãºnico cedo.
+- O hero precisa explicar:
+  - o que Ã©
+  - para quem Ã©
+  - por que Ã© diferente
+  - qual o prÃ³ximo passo
+- NÃ£o inventar promessa, bÃ´nus ou urgÃªncia falsa.
+- Design com contraste alto, leitura limpa, poucos elementos e blocos fortes.
+
+## Forma de resposta
+- Seja objetivo.
+- Antes de implementar, diga qual Ã© a menor mudanÃ§a segura.
+- Depois de implementar, liste arquivos alterados e resumo da alteraÃ§Ã£o.
+# Forja Fit â€” EstratÃ©gia Base
+
+## 1. Posicionamento do produto
+Forja Fit nÃ£o deve ser comunicado como â€œmais um treinoâ€.
+Ele deve ser comunicado como um sistema de entrada e progressÃ£o fÃ­sica guiado por quiz, criado para mostrar o ponto real de partida do usuÃ¡rio e entregar uma direÃ§Ã£o mais coerente para o objetivo, o nÃ­vel atual e a rotina que ele realmente consegue sustentar.
+
+## 2. Avatar principal
+O avatar principal nÃ£o Ã© o fitness lover.
+Ã‰ o recomeÃ§ador frustrado.
+
+### Perfil base
+- Homem adulto brasileiro, geralmente entre 27 e 39 anos
+- JÃ¡ tentou academia, treino do YouTube, desafio curto ou promessa de influencer
+- ComeÃ§a animado, trava, para e volta para a estaca zero
+- Quer secar, definir e recuperar controle corporal
+- NÃ£o quer depender de academia perfeita, rotina perfeita ou motivaÃ§Ã£o heroica
+
+### Dor central
+Ele sente que sempre recomeÃ§a do zero.
+Tem vergonha do estado atual do corpo.
+Se culpa pela prÃ³pria inconsistÃªncia.
+Mas, no fundo, o problema real Ã© falta de direÃ§Ã£o certa.
+
+### Desejo central
+Voltar a se sentir no controle do prÃ³prio corpo.
+Secar a barriga.
+Definir o tronco.
+Construir uma rotina que dure mais do que alguns dias.
+
+## 3. Tese central da comunicaÃ§Ã£o
+A maioria das pessoas nÃ£o falha por falta de disciplina.
+Falha por comeÃ§ar no lugar errado.
+
+O problema nÃ£o Ã© preguiÃ§a.
+O problema Ã© tentar seguir um treino genÃ©rico que nÃ£o conversa com:
+- objetivo atual
+- nÃ­vel atual
+- rotina real
+
+## 4. Inimigo comum
+O inimigo da comunicaÃ§Ã£o Ã© o treino genÃ©rico de internet:
+- feito para outra rotina
+- feito para outro nÃ­vel
+- feito para outra vida
+- baseado em intensidade antes de direÃ§Ã£o
+
+## 5. Categoria e mecanismo
+### Categoria da oferta
+Sistema Forja Progressiva#
+
+### Nome comercial do mecanismo
+Mapa de ProgressÃ£o Inicial Forja Fit
+
+### Nome proprietÃ¡rio interno
+FenÃ´meno ECR# (Entrada Certa Responsiva)
+
+### O que o mecanismo faz
+O mecanismo cruza 3 fatores:
+1. objetivo real
+2. nÃ­vel atual
+3. rotina possÃ­vel
+
+Quando essas 3 variÃ¡veis se alinham, o usuÃ¡rio ganha:
+- mais clareza para comeÃ§ar
+- progressÃ£o mais coerente
+- mais chance de constÃ¢ncia
+- menos improviso
+- menos recomeÃ§os
+
+## 6. Promessa correta
+A promessa nÃ£o Ã© milagre.
+A promessa Ã©:
+- direÃ§Ã£o
+- encaixe
+- progressÃ£o possÃ­vel
+- constÃ¢ncia viÃ¡vel
+- comeÃ§o certo
+
+## 7. Promessas proibidas
+- NÃ£o prometer transformaÃ§Ã£o fÃ­sica em prazo fechado sem prova oficial
+- NÃ£o inventar bÃ´nus, mÃ³dulos ou benefÃ­cios que o produto nÃ£o entregue
+- NÃ£o usar urgÃªncia falsa
+- NÃ£o comunicar como se fosse um treino mÃ¡gico ou secreto
+
+## 8. Linguagem da marca
+A comunicaÃ§Ã£o deve ser:
+- direta
+- humana
+- especÃ­fica
+- sem linguagem de guru
+- sem exagero fitness
+- sem tom institucional demais
+
+## 9. Gatilhos verbais prioritÃ¡rios
+- Seu ponto real de partida
+- Plano que cabe na sua vida
+- Parar de recomeÃ§ar do zero
+- Treino certo para o seu momento
+- ProgressÃ£o possÃ­vel
+- ComeÃ§o sem ego
+- DireÃ§Ã£o antes de intensidade
+- Resultado sem rotina perfeita
+
+## 10. O que mais convence esse avatar
+- diagnÃ³stico que faÃ§a sentido
+- explicaÃ§Ã£o clara de por que o plano Ã© diferente
+- visual claro da progressÃ£o
+- prova de que o comeÃ§o Ã© possÃ­vel para quem estÃ¡ travado
+- linguagem simples e lÃ³gica
+
+## 11. DireÃ§Ã£o para a pÃ¡gina /oferta
+A pÃ¡gina /oferta deve funcionar como pÃ¡gina de convicÃ§Ã£o + decisÃ£o.
+Ela nÃ£o deve parecer uma VSL genÃ©rica nem uma pÃ¡gina institucional.
+
+### Ordem da pÃ¡gina
+1. Hero
+2. Dor
+3. Quebra de crenÃ§a
+4. Mecanismo
+5. BenefÃ­cios
+6. Antes vs Depois mental
+7. Para quem Ã© / Para quem nÃ£o Ã©
+8. Oferta
+9. PreÃ§o + Garantia + CTA
+10. Encruzilhada final
+
+### Prioridades visuais da /oferta
+- Hero forte acima da dobra
+- CTA visÃ­vel cedo
+- Quebra de crenÃ§a forte
+- Mecanismo explicado logo no inÃ­cio
+- Contraste alto
+- Leitura limpa
+- Poucos elementos e blocos fortes
+
+## 12. Regras de execuÃ§Ã£o no site
+Toda mudanÃ§a de pÃ¡gina deve:
+- respeitar essa estratÃ©gia
+- preservar responsividade
+- melhorar clareza da oferta
+- fortalecer hierarquia visual
+- aumentar forÃ§a do CTA
+- evitar texto genÃ©rico
+- evitar visual neutro demais
+- manter honestidade comercial
+# Forja Fit â€” Storyboard da PÃ¡gina /oferta
+
+## Objetivo
+Definir a narrativa visual e emocional da /oferta quadro a quadro, para garantir que a experiÃªncia conte uma histÃ³ria de convicÃ§Ã£o e decisÃ£o, e nÃ£o apenas uma sequÃªncia de blocos.
+
+## EmoÃ§Ã£o central da jornada
+A jornada da pÃ¡gina deve levar o usuÃ¡rio de:
+- culpa
+- frustraÃ§Ã£o
+- confusÃ£o
+- desalinhamento
+
+para:
+- clareza
+- alÃ­vio
+- direÃ§Ã£o
+- confianÃ§a
+- aÃ§Ã£o
+
+## Grande transformaÃ§Ã£o perceptiva
+O usuÃ¡rio deve sentir:
+â€œeu nÃ£o travava por falta de disciplina; eu travava porque sempre comeÃ§ava desalinhado.â€
+
+## Estrutura narrativa da /oferta
+
+### Quadro 1 â€” Hero / Impacto imediato
+#### Objetivo
+Capturar atenÃ§Ã£o, gerar identificaÃ§Ã£o imediata e introduzir o Eixo de Retomada.
+
+#### O que o usuÃ¡rio sente
+- curiosidade
+- reconhecimento
+- tensÃ£o controlada
+- sensaÃ§Ã£o de que o site entende sua situaÃ§Ã£o
+
+#### O que aparece
+- eyebrow
+- headline forte
+- subheadline emocional e estratÃ©gica
+- CTA principal
+- microprovas
+- cena visual com o eixo central
+- objetivo, nÃ­vel e rotina orbitando ou deslocados de forma controlada
+
+#### Mensagem implÃ­cita
+â€œExiste um motivo para vocÃª sempre travar.â€
+
+---
+
+### Quadro 2 â€” Culpa / FrustraÃ§Ã£o
+#### Objetivo
+Nomear o sentimento do avatar sem culpar a pessoa.
+
+#### O que o usuÃ¡rio sente
+- dor reconhecida
+- frustraÃ§Ã£o validada
+- identificaÃ§Ã£o emocional
+
+#### O que aparece
+- texto curto e direto
+- cena mais difusa
+- menos alinhamento visual
+- sensaÃ§Ã£o de ruÃ­do controlado
+- menor clareza no centro da composiÃ§Ã£o
+
+#### Mensagem implÃ­cita
+â€œVocÃª nÃ£o estÃ¡ sozinho nisso.â€
+
+---
+
+### Quadro 3 â€” DiagnÃ³stico do erro
+#### Objetivo
+Instalar a nova crenÃ§a:
+o erro nÃ£o Ã© falta de disciplina; Ã© comeÃ§ar com o plano errado.
+
+#### O que o usuÃ¡rio sente
+- alÃ­vio
+- reinterpretaÃ§Ã£o da prÃ³pria falha
+- abertura mental para nova soluÃ§Ã£o
+
+#### O que aparece
+- quebra de crenÃ§a forte
+- frase de diagnÃ³stico
+- eixo ficando mais visÃ­vel
+- elementos comeÃ§ando a reduzir dispersÃ£o
+- fundo mais limpo
+- menos ruÃ­do visual
+
+#### Mensagem implÃ­cita
+â€œO problema nÃ£o era vocÃª. Era o ponto de partida.â€
+
+---
+
+### Quadro 4 â€” Alinhamento das variÃ¡veis
+#### Objetivo
+Mostrar que objetivo, nÃ­vel e rotina precisam entrar no eixo.
+
+#### O que o usuÃ¡rio sente
+- lÃ³gica
+- clareza
+- entendimento
+- sensaÃ§Ã£o de sistema
+
+#### O que aparece
+- objetivo entra
+- nÃ­vel entra
+- rotina entra
+- os 3 convergem para o eixo
+- a cena fica mais estÃ¡vel
+- a linha central ganha forÃ§a
+- glow e contraste aumentam de forma controlada
+
+#### Mensagem implÃ­cita
+â€œQuando as variÃ¡veis certas se alinham, o comeÃ§o faz sentido.â€
+
+---
+
+### Quadro 5 â€” Reveal do mecanismo
+#### Objetivo
+Apresentar o Mapa de ProgressÃ£o Inicial Forja Fit como sistema vivo.
+
+#### O que o usuÃ¡rio sente
+- confianÃ§a
+- inteligÃªncia da soluÃ§Ã£o
+- percepÃ§Ã£o de valor
+- sensaÃ§Ã£o de precisÃ£o
+
+#### O que aparece
+- nome do mecanismo
+- estrutura visual mostrando entradas e convergÃªncia
+- interface clara
+- menos abstraÃ§Ã£o
+- mais sensaÃ§Ã£o de ferramenta e direÃ§Ã£o
+
+#### Mensagem implÃ­cita
+â€œIsso nÃ£o Ã© mais um treino. Ã‰ um sistema de entrada certa.â€
+
+---
+
+### Quadro 6 â€” ComeÃ§o certo / Resultado possÃ­vel
+#### Objetivo
+Mostrar que, com o comeÃ§o certo, constÃ¢ncia e progresso deixam de parecer guerra.
+
+#### O que o usuÃ¡rio sente
+- esperanÃ§a realista
+- confianÃ§a
+- vontade de seguir
+- sensaÃ§Ã£o de possibilidade
+
+#### O que aparece
+- composiÃ§Ã£o estÃ¡vel
+- centro organizado
+- menos ruÃ­do
+- mais legibilidade
+- benefÃ­cio percebido
+- antes e depois mental
+
+#### Mensagem implÃ­cita
+â€œQuando a entrada Ã© certa, o progresso volta a ser possÃ­vel.â€
+
+---
+
+### Quadro 7 â€” Parte comercial premium
+#### Objetivo
+Transformar clareza em desejo e decisÃ£o.
+
+#### O que o usuÃ¡rio sente
+- entendimento
+- seguranÃ§a
+- prontidÃ£o para avanÃ§ar
+
+#### O que aparece
+- para quem Ã© / nÃ£o Ã©
+- o que leva
+- benefÃ­cios
+- transformaÃ§Ã£o
+- CTA
+- preÃ§o e garantia quando aplicÃ¡vel
+
+#### Mensagem implÃ­cita
+â€œAgora avanÃ§ar parece lÃ³gico.â€
+
+---
+
+### Quadro 8 â€” DecisÃ£o final
+#### Objetivo
+ForÃ§ar contraste entre improviso e direÃ§Ã£o.
+
+#### O que o usuÃ¡rio sente
+- escolha clara
+- tensÃ£o final
+- impulso para agir
+
+#### O que aparece
+- encruzilhada
+- opÃ§Ã£o A: continuar no improviso
+- opÃ§Ã£o B: avanÃ§ar com direÃ§Ã£o
+- CTA final forte
+
+#### Mensagem implÃ­cita
+â€œVocÃª jÃ¡ entendeu o problema. Agora decide se continua igual ou entra no eixo.â€
+
+## Curva emocional da pÃ¡gina
+1. reconhecimento
+2. dor
+3. alÃ­vio
+4. clareza
+5. confianÃ§a
+6. decisÃ£o
+
+## Curva visual da pÃ¡gina
+1. desalinhamento controlado
+2. ruÃ­do e tensÃ£o
+3. foco surgindo
+4. convergÃªncia
+5. estabilizaÃ§Ã£o
+6. sistema claro
+7. decisÃ£o limpa
+
+## Regra de ouro do storyboard
+Cada seÃ§Ã£o precisa responder a uma pergunta emocional do usuÃ¡rio:
+
+- Hero: â€œisso me entende?â€
+- Culpa: â€œsou sÃ³ eu?â€
+- DiagnÃ³stico: â€œentÃ£o o problema nÃ£o era minha fraqueza?â€
+- Alinhamento: â€œo que estava faltando?â€
+- Mecanismo: â€œcomo isso funciona?â€
+- Resultado possÃ­vel: â€œisso pode funcionar para mim?â€
+- Comercial: â€œo que eu recebo?â€
+- DecisÃ£o: â€œqual Ã© o prÃ³ximo passo?â€
+
+## O que evitar
+- seÃ§Ãµes que nÃ£o movem a histÃ³ria
+- visual bonito sem funÃ§Ã£o
+- textos longos demais
+- excesso de abstraÃ§Ã£o
+- excesso de cards genÃ©ricos
+- movimento sem significado
+- quebra de ritmo comercial
+
+## CritÃ©rio de qualidade
+Se o usuÃ¡rio sentir:
+â€œque bonitoâ€
+mas nÃ£o sentir:
+â€œagora entendi por que travoâ€
+
+entÃ£o o storyboard falhou.
+
+Se o usuÃ¡rio sentir:
+â€œesse Ã© o jeito certo de recomeÃ§arâ€
+
+entÃ£o o storyboard cumpriu sua funÃ§Ã£o.
+# Forja Fit â€” Motion System
+
+## Objetivo
+Definir como o movimento da /oferta deve funcionar para transmitir:
+- desalinhamento
+- diagnÃ³stico
+- alinhamento
+- clareza
+- direÃ§Ã£o
+- decisÃ£o
+
+## Regra central
+Movimento nunca existe sÃ³ para â€œficar bonitoâ€.
+Todo motion precisa reforÃ§ar a mensagem:
+â€œo problema nÃ£o era falta de disciplina; era comeÃ§ar desalinhado.â€
+
+## SensaÃ§Ã£o desejada
+O motion da pÃ¡gina deve parecer:
+- premium
+- suave
+- preciso
+- profundo
+- controlado
+- intencional
+- cinematogrÃ¡fico com moderaÃ§Ã£o
+- nunca chamativo demais
+
+## O que o motion precisa comunicar
+1. tensÃ£o inicial
+2. confusÃ£o organizada
+3. reorganizaÃ§Ã£o visual
+4. estabilizaÃ§Ã£o
+5. clareza
+6. progresso possÃ­vel
+
+## Hierarquia de motion
+
+### NÃ­vel 1 â€” Micro motion
+Usado em:
+- hover
+- CTA
+- cards
+- Ã­cones
+- checkpoints
+- micro feedbacks
+
+CaracterÃ­sticas:
+- curto
+- sutil
+- leve
+- sem roubar atenÃ§Ã£o
+
+### NÃ­vel 2 â€” Motion estrutural
+Usado em:
+- entrada de seÃ§Ãµes
+- reveal de headlines
+- surgimento de superfÃ­cies
+- troca de estados do eixo
+- parallax leve
+
+CaracterÃ­sticas:
+- define ritmo
+- constrÃ³i percepÃ§Ã£o
+- ainda nÃ£o Ã© storytelling completo
+
+### NÃ­vel 3 â€” Motion narrativo
+Usado em:
+- seÃ§Ã£o por scroll
+- mechanism reveal
+- momentos de transformaÃ§Ã£o
+- sequÃªncia de culpa â†’ diagnÃ³stico â†’ alinhamento â†’ comeÃ§o certo
+
+CaracterÃ­sticas:
+- guiado por scroll
+- controlado
+- progressivo
+- deve contar histÃ³ria
+
+## Easing
+Usar easing com sensaÃ§Ã£o premium e controlada.
+
+### PreferÃªncia
+- ease-out suave para entradas
+- ease-in-out para reorganizaÃ§Ã£o
+- evitar movimentos secos ou elÃ¡sticos
+- evitar bounce exagerado
+
+### SensaÃ§Ã£o
+Nada deve parecer:
+- saltando
+- pulando
+- vibrando
+- â€œarcadeâ€
+
+## DuraÃ§Ã£o
+
+### MicrointeraÃ§Ãµes
+- 160ms a 280ms
+
+### Entradas simples
+- 320ms a 520ms
+
+### TransiÃ§Ãµes estruturais
+- 500ms a 900ms
+
+### Narrativa por scroll
+- progressiva pelo scroll
+- sem pressa
+- sem travar demais a navegaÃ§Ã£o
+
+## Motion primitives
+
+### Fade
+Usar para:
+- entrada de textos
+- revelaÃ§Ã£o de superfÃ­cies
+- transiÃ§Ãµes de estado
+
+### Translate
+Usar para:
+- elementos entrando em cena
+- cards se aproximando do eixo
+- shift de profundidade
+
+### Scale
+Usar com moderaÃ§Ã£o para:
+- foco
+- ativaÃ§Ã£o
+- aproximaÃ§Ã£o controlada
+
+### Blur
+Usar para:
+- comeÃ§o difuso
+- clareza surgindo
+- profundidade
+- entrada/saÃ­da de camadas
+
+### Opacity
+Usar para:
+- reforÃ§ar hierarquia
+- indicar o que estÃ¡ â€œfora do eixoâ€
+- revelar clareza progressiva
+
+### Rotate
+Usar apenas levemente para:
+- sensaÃ§Ã£o de desalinhamento
+- resposta ao mouse
+- micro rotaÃ§Ã£o de profundidade
+
+### Parallax
+Usar para:
+- dar profundidade
+- sugerir cÃ¢mera
+- fazer o eixo parecer vivo
+- nunca exagerar
+
+## Mouse interaction
+
+### Papel
+O mouse nÃ£o Ã© brinquedo.
+Ele sÃ³ adiciona vida e profundidade.
+
+### O que pode reagir
+- eixo central
+- camadas de fundo
+- checkpoints
+- glow leve
+- silhueta/forma abstrata
+
+### O que nÃ£o pode acontecer
+- rotaÃ§Ã£o exagerada
+- sensaÃ§Ã£o de perda de controle
+- movimento cansativo
+- distraÃ§Ã£o da copy
+
+### Intensidade
+- baixa a moderada
+- desktop only quando fizer sentido
+- desativar ou reduzir em mobile
+- respeitar prefers-reduced-motion
+
+## Scroll motion
+
+## Objetivo
+O scroll deve contar a transformaÃ§Ã£o.
+
+### Etapas obrigatÃ³rias
+1. culpa
+2. diagnÃ³stico
+3. alinhamento
+4. comeÃ§o certo
+
+### Regra
+A pessoa deve sentir que a cena vai ficando mais coerente conforme avanÃ§a.
+
+### O que acontece visualmente
+- elementos dispersos se aproximam
+- ruÃ­do visual reduz
+- linha do eixo fica mais forte
+- textos ganham clareza
+- o centro estabiliza
+- a direÃ§Ã£o aparece
+
+## Hero motion
+
+### Papel
+O hero deve:
+- parecer vivo
+- reagir ao mouse
+- introduzir profundidade
+- sugerir desalinhamento indo para controle
+
+### Permitido
+- parallax leve
+- micro rotaÃ§Ã£o
+- glow pulsando suavemente
+- leve drift de camadas
+- CTA com hover refinado
+
+### Proibido
+- looping agressivo
+- efeito chamativo demais
+- animaÃ§Ã£o competindo com headline
+
+## Narrative section motion
+
+### Papel
+Contar a histÃ³ria do avatar.
+
+### Estrutura ideal
+- seÃ§Ã£o com pin no desktop, se necessÃ¡rio
+- texto e visual andando juntos
+- estados muito claros
+
+### Linguagem de transiÃ§Ã£o
+- culpa = mais difuso, menos alinhado
+- diagnÃ³stico = foco surgindo
+- alinhamento = convergÃªncia
+- comeÃ§o certo = estabilidade + energia controlada
+
+## Mechanism reveal motion
+
+### Papel
+Mostrar o Mapa de ProgressÃ£o Inicial como sistema vivo.
+
+### Coreografia base
+- objetivo entra
+- nÃ­vel entra
+- rotina entra
+- os 3 orbitam
+- os 3 se conectam
+- a rota aparece
+
+### SensaÃ§Ã£o
+A pessoa precisa sentir:
+â€œagora tudo faz sentidoâ€
+
+## CTA motion
+
+### CTA principal
+- hover com leve lift
+- sombra levemente mais presente
+- micro escala muito contida
+- feedback rÃ¡pido
+
+### CTA final
+- forte
+- limpo
+- sem efeito espalhafatoso
+
+## Mobile motion
+
+### Regra central
+Mobile nÃ£o Ã© desktop reduzido.
+
+### Ajustes
+- menos camadas simultÃ¢neas
+- menos blur
+- menos parallax
+- sem pin agressivo se comprometer usabilidade
+- mais foco em clareza
+- mais foco em performance
+
+### Fallback
+Se precisar escolher entre:
+- motion bonito
+- experiÃªncia rÃ¡pida e clara
+
+Escolher:
+- experiÃªncia rÃ¡pida e clara
+
+## Performance rules
+- preferir transform e opacity
+- evitar reflows desnecessÃ¡rios
+- evitar animaÃ§Ãµes pesadas em tudo ao mesmo tempo
+- usar requestAnimationFrame com suavizaÃ§Ã£o quando necessÃ¡rio
+- ativar interaÃ§Ãµes complexas sÃ³ onde gera valor real
+- respeitar prefers-reduced-motion
+- mobile sempre com versÃ£o simplificada
+
+## Ferramentas por tipo de motion
+
+### Motion
+Usar para:
+- reveal
+- parallax leve
+- transiÃ§Ãµes de componentes
+- micro entradinhas
+- scroll progress simples
+
+### GSAP
+Usar para:
+- pin
+- scrub
+- timelines narrativas
+- sequÃªncias mais controladas
+
+### Lottie
+Usar sÃ³ para:
+- micro assets
+- pequenos loops
+- detalhes de eixo/checkpoint
+- nÃ£o usar como motor principal da narrativa
+
+## O que evitar
+- bounce
+- elasticidade exagerada
+- neon pulsando sem motivo
+- animaÃ§Ã£o em tudo
+- scroll travado o tempo todo
+- loops que cansam
+- sensaÃ§Ã£o gamer
+- sensaÃ§Ã£o de â€œsite tech vazioâ€
+
+## CritÃ©rio de qualidade
+Se o motion parecer:
+- decorativo demais, estÃ¡ errado
+- agressivo demais, estÃ¡ errado
+- confuso demais, estÃ¡ errado
+
+Se parecer:
+- parte da histÃ³ria
+- parte do diagnÃ³stico
+- parte da clareza
+- parte da decisÃ£o
+
+entÃ£o estÃ¡ certo.
+# Forja Fit â€” Supreme Interface Blueprint
+
+## MissÃ£o da pÃ¡gina /oferta
+Transformar a /oferta em uma experiÃªncia premium de convicÃ§Ã£o + decisÃ£o, capaz de fazer o usuÃ¡rio sentir visual e emocionalmente que:
+â€œo problema nÃ£o era falta de disciplina; era ter recomeÃ§ado do jeito errado.â€
+
+## Papel da pÃ¡gina no funil
+- Continuar a narrativa do quiz
+- Aumentar clareza
+- Instalar nova crenÃ§a
+- Mostrar o mecanismo
+- Empurrar para checkout
+
+## Avatar central
+RecomeÃ§ador frustrado:
+- jÃ¡ tentou antes
+- sente culpa
+- quer secar/definir/retomar controle
+- responde melhor a direÃ§Ã£o do que motivaÃ§Ã£o
+- rejeita promessa exagerada
+- compra clareza, encaixe e progresso possÃ­vel
+
+## Grande tese
+A maioria das pessoas nÃ£o falha por falta de disciplina.
+Falha por comeÃ§ar no lugar errado.
+
+## Grande metÃ¡fora visual
+Eixo de Retomada
+
+O eixo representa o alinhamento entre:
+- objetivo real
+- nÃ­vel atual
+- rotina possÃ­vel
+
+No inÃ­cio:
+- desalinhamento
+- confusÃ£o
+- frustraÃ§Ã£o
+- baixa coerÃªncia visual
+
+Ao longo da experiÃªncia:
+- as variÃ¡veis entram no eixo
+- a cena estabiliza
+- a clareza aumenta
+- a direÃ§Ã£o fica evidente
+
+## SensaÃ§Ã£o final desejada
+- clareza
+- alÃ­vio
+- direÃ§Ã£o
+- progresso possÃ­vel
+- confianÃ§a
+- aÃ§Ã£o
+
+## Linguagem visual
+- escuro
+- sofisticado
+- preciso
+- profundo
+- premium funcional
+- futurista com moderaÃ§Ã£o
+- sem cara gamer
+- sem cara de template fitness
+- sem poluiÃ§Ã£o
+
+## PrincÃ­pios de design
+1. Copy manda, visual reforÃ§a
+2. CTA sempre visÃ­vel cedo
+3. Movimento com significado
+4. Sistema antes de efeito
+5. Contraste alto e leitura limpa
+6. Mobile nÃ£o pode parecer versÃ£o pior
+
+## PrincÃ­pios de motion
+1. Tudo precisa ter motivo
+2. Desalinhamento inicial controlado
+3. Eixo central como estabilizador
+4. Profundidade por camadas
+5. Scroll conta histÃ³ria
+6. Mouse sÃ³ adiciona vida, nÃ£o distraÃ§Ã£o
+7. Mobile com fallback leve
+
+## Estrutura final da /oferta
+1. Hero imersivo
+2. Narrativa por scroll
+3. Mecanismo visual
+4. BenefÃ­cios e transformaÃ§Ã£o
+5. Para quem Ã© / nÃ£o Ã©
+6. Oferta e entregÃ¡veis
+7. DecisÃ£o / preÃ§o / garantia / CTA
+8. Encruzilhada final
+
+## Hero imersivo
+Objetivo:
+- capturar atenÃ§Ã£o
+- recodificar o problema
+- apresentar a tese
+- mostrar o eixo
+
+Componentes:
+- eyebrow
+- headline
+- subheadline
+- CTA principal
+- microprovas
+- RetomadaAxisScene
+
+## Narrativa por scroll
+4 etapas:
+1. culpa
+2. diagnÃ³stico
+3. alinhamento
+4. comeÃ§o certo
+
+## Mecanismo visual
+Mostrar o Mapa de ProgressÃ£o Inicial como sistema:
+- objetivo entra
+- nÃ­vel entra
+- rotina entra
+- os 3 convergem
+- a rota aparece
+
+## ConversÃ£o
+A parte comercial precisa:
+- parecer premium
+- continuar clara
+- manter CTA dominante
+- nÃ£o virar texto institucional
+- nÃ£o virar arte vazia
+
+## RestriÃ§Ãµes absolutas
+- nÃ£o copiar visual literal de referÃªncia
+- nÃ£o usar efeito sem funÃ§Ã£o
+- nÃ£o esconder CTA
+- nÃ£o enfraquecer copy
+- nÃ£o usar promessa fake
+- nÃ£o exagerar no glow
+- nÃ£o deixar desktop pesado
+- nÃ£o deixar mobile quebrado
+
+## Stack de produÃ§Ã£o
+- Next.js
+- Tailwind
+- Motion
+- GSAP apenas onde houver pin/scrub real
+- Lottie apenas em micro assets
+- sem WebGL global nesta fase
+
+## Ordem de execuÃ§Ã£o
+1. Blueprint
+2. UI system
+3. Motion system
+4. Storyboard
+5. Reset visual
+6. Narrativa scroll
+7. Mechanism reveal
+8. Conversion polish
+9. Performance and QA
+
+## CritÃ©rio de sucesso
+O usuÃ¡rio deve sentir:
+â€œagora eu entendi por que sempre travei â€” e esse parece ser o jeito certo de recomeÃ§ar.â€
+# Forja Fit â€” Oferta Experience Spec
+
+## Objetivo
+Transformar a pÃ¡gina /oferta em uma experiÃªncia premium, imersiva e persuasiva, com narrativa visual por scroll, sem perder clareza comercial e conversÃ£o.
+
+## Ideia central
+A pÃ¡gina deve fazer o usuÃ¡rio sentir que:
+â€œo problema nÃ£o era falta de disciplina; era ter recomeÃ§ado do jeito errado.â€
+
+## Conceito visual principal
+A experiÃªncia gira em torno de um eixo central chamado:
+
+Eixo de Retomada
+
+Esse eixo representa o alinhamento entre:
+- objetivo real
+- nÃ­vel atual
+- rotina possÃ­vel
+
+No inÃ­cio da experiÃªncia, esses 3 elementos aparecem desalinhados, distantes ou em conflito.
+Conforme o usuÃ¡rio scrolla, eles entram no eixo.
+A sensaÃ§Ã£o final deve ser:
+- menos confusÃ£o
+- mais clareza
+- mais direÃ§Ã£o
+- comeÃ§o certo
+- progresso possÃ­vel
+
+## SensaÃ§Ã£o desejada
+- escuro
+- sofisticado
+- minimalista
+- preciso
+- profundo
+- premium
+- sem cara de template fitness
+- sem poluiÃ§Ã£o visual
+
+## Regra principal
+A experiÃªncia visual nunca pode ser sÃ³ decorativa.
+Toda animaÃ§Ã£o precisa reforÃ§ar a mensagem da copy.
+
+## Estrutura da pÃ¡gina
+
+### 1. Hero imersivo
+Objetivo:
+- conexÃ£o imediata
+- tese forte
+- CTA claro
+- introduÃ§Ã£o do eixo de retomada
+
+Elementos:
+- eyebrow
+- headline
+- subheadline
+- CTA principal
+- visual central do eixo
+- 3 elementos orbitando ou se aproximando do centro:
+  - objetivo
+  - nÃ­vel
+  - rotina
+
+SensaÃ§Ã£o:
+â€œesse site entende exatamente por que eu travoâ€
+
+### 2. Narrativa por scroll
+Objetivo:
+criar uma mini jornada visual e emocional em 4 momentos
+
+Etapas:
+1. culpa / frustraÃ§Ã£o
+2. diagnÃ³stico do erro
+3. alinhamento das variÃ¡veis
+4. comeÃ§o certo gerando resultado
+
+Essa seÃ§Ã£o deve usar animaÃ§Ã£o guiada por scroll com narrativa clara.
+
+### 3. Mecanismo visual da oferta
+Objetivo:
+mostrar o Mapa de ProgressÃ£o Inicial Forja Fit como sistema e nÃ£o como lista estÃ¡tica
+
+LÃ³gica visual:
+- objetivo entra
+- nÃ­vel entra
+- rotina entra
+- os 3 se conectam
+- o caminho fica claro
+
+### 4. Bloco comercial
+Depois da experiÃªncia visual, a pÃ¡gina entra na parte de conversÃ£o:
+- para quem Ã©
+- o que a pessoa leva
+- benefÃ­cios
+- transformaÃ§Ã£o
+- CTA
+- preÃ§o
+- garantia
+
+## Regras de animaÃ§Ã£o
+- suaves
+- profissionais
+- premium
+- sem exagero
+- com propÃ³sito
+- usar profundidade, blur, opacidade, deslocamento, scale e pinning com inteligÃªncia
+- evitar animaÃ§Ã£o gratuita
+- evitar excesso de movimento no mobile
+
+## Regras tÃ©cnicas
+- usar Next.js
+- usar Tailwind
+- usar Motion para animaÃ§Ãµes mais leves e responsivas
+- usar GSAP ScrollTrigger apenas onde pin e scrub realmente forem necessÃ¡rios
+- fallback leve no mobile
+- performance Ã© prioridade
+- cÃ³digo modular e reutilizÃ¡vel
+
+## Arquitetura desejada
+A pÃ¡gina /oferta deve ser dividida em componentes.
+
+SugestÃ£o de componentes:
+- OfferHeroImmersive
+- RetomadaAxisScene
+- OfferNarrativeScroll
+- ProgressionMechanismReveal
+- OfferConversionSection
+- OfferDecisionBlock
+
+## Regras de copy
+- evitar texto institucional
+- evitar exagero fitness
+- evitar promessa mÃ¡gica
+- reforÃ§ar que o erro era o comeÃ§o desalinhado
+- mostrar que a soluÃ§Ã£o Ã© direÃ§Ã£o antes de intensidade
+- manter tom humano, direto e especÃ­fico
+
+## Regra de implementaÃ§Ã£o
+NÃ£o refatorar tudo de uma vez.
+Implementar em fases.
+
+## Fases recomendadas
+### Fase 1
+Definir arquitetura da nova /oferta e separar a pÃ¡gina em componentes.
+
+### Fase 2
+Construir o novo hero imersivo com eixo de retomada.
+
+### Fase 3
+Construir a seÃ§Ã£o narrativa por scroll.
+
+### Fase 4
+Construir o reveal visual do mecanismo.
+
+### Fase 5
+Reorganizar a parte comercial final com foco em conversÃ£o.
+
+## RestriÃ§Ãµes
+- nÃ£o copiar o visual literal de nenhum site
+- nÃ£o usar efeitos sem funÃ§Ã£o
+- nÃ£o transformar a pÃ¡gina em peÃ§a artÃ­stica sem venda
+- nÃ£o quebrar CTA, tracking ou responsividade
+# Forja Fit â€” UI System
+
+## Objetivo
+Definir o sistema visual da /oferta para manter consistÃªncia, sensaÃ§Ã£o premium e clareza comercial em toda a experiÃªncia.
+
+## DireÃ§Ã£o visual geral
+A interface deve parecer:
+- escura
+- sofisticada
+- precisa
+- profunda
+- premium funcional
+- levemente futurista
+- limpa
+- forte
+- sem exagero fitness
+- sem cara de template
+
+## Regra central
+A interface nÃ£o existe para â€œenfeitarâ€.
+Ela existe para reforÃ§ar:
+- desalinhamento
+- clareza
+- direÃ§Ã£o
+- progresso possÃ­vel
+- decisÃ£o
+
+## Paleta principal
+
+### Fundos
+- bg-primary: #07090D
+- bg-secondary: #0E1218
+- bg-tertiary: #111722
+- bg-elevated: #18212D
+
+### SuperfÃ­cies
+- surface-1: rgba(19, 26, 35, 0.82)
+- surface-2: rgba(24, 33, 45, 0.92)
+- surface-3: rgba(12, 17, 24, 0.92)
+
+### Texto
+- text-primary: #F3F6F8
+- text-secondary: #98A6B8
+- text-muted: #6E7B8C
+- text-accent-soft: #C9F7D0
+
+### Acentos
+- accent-primary: #7CFF6B
+- accent-secondary: #3DD6C6
+- accent-cta: #F97316
+- accent-warning-soft: #FFB86A
+
+### Bordas e linhas
+- border-soft: rgba(255, 255, 255, 0.08)
+- border-medium: rgba(255, 255, 255, 0.12)
+- line-axis: rgba(124, 255, 107, 0.7)
+- line-grid: rgba(255, 255, 255, 0.05)
+
+### Glows controlados
+- glow-green: rgba(124, 255, 107, 0.18)
+- glow-cyan: rgba(61, 214, 198, 0.18)
+- glow-orange: rgba(249, 115, 22, 0.16)
+
+## Regra de cor
+- Verde = direÃ§Ã£o, alinhamento, ativaÃ§Ã£o do eixo
+- Ciano = precisÃ£o, sistema, inteligÃªncia
+- Laranja = aÃ§Ã£o, CTA, decisÃ£o
+- Branco/off-white = clareza e leitura
+- Cinza frio = contexto, apoio, texto secundÃ¡rio
+
+## Tipografia
+
+### PrincÃ­pios
+- pouca variedade
+- alto contraste
+- muito controle de peso e espaÃ§amento
+- headline com presenÃ§a
+- corpo limpo e respirÃ¡vel
+
+### Hierarquia sugerida
+- Display Hero Desktop: 64â€“76px
+- Display Hero Mobile: 38â€“46px
+- H2 Section Desktop: 40â€“52px
+- H2 Section Mobile: 28â€“34px
+- H3 / Cards: 18â€“24px
+- Body Large: 18â€“20px
+- Body Base: 16px
+- Microcopy: 13â€“14px
+- Eyebrow: 11â€“12px, caixa alta, tracking aberto
+
+### Regras tipogrÃ¡ficas
+- Headlines com line-height curto
+- Textos de apoio com line-height confortÃ¡vel
+- Evitar blocos longos
+- Sempre favorecer leitura rÃ¡pida + impacto
+
+## Grid e spacing
+
+### Layout base
+- container mÃ¡ximo: 1280px
+- gutters desktop: 32px
+- gutters mobile: 20px
+- grid desktop: 12 colunas
+- grid tablet: 8 colunas
+- grid mobile: 4 colunas
+
+### EspaÃ§amento vertical
+- seÃ§Ã£o hero: 120â€“160px top/bottom
+- seÃ§Ã£o padrÃ£o desktop: 96â€“128px
+- seÃ§Ã£o padrÃ£o mobile: 64â€“80px
+- espaÃ§o entre blocos internos: 24 / 32 / 48 / 64
+
+### Regra de ritmo
+A pÃ¡gina deve respirar.
+Poucos elementos por bloco.
+Mais peso visual e menos ruÃ­do.
+
+## SuperfÃ­cies e cards
+
+### Linguagem
+NÃ£o usar â€œcard genÃ©rico de SaaSâ€.
+As superfÃ­cies devem parecer parte de um sistema de interface premium.
+
+### PadrÃ£o visual
+- fundo translÃºcido escuro
+- blur leve
+- borda suave
+- sombra profunda e limpa
+- cantos generosos
+- camadas internas discretas
+
+### Raios
+- raio pequeno: 14px
+- raio mÃ©dio: 20px
+- raio grande: 28px
+- pill/full: 999px
+
+### Sombras
+- shadow-soft: 0 10px 30px rgba(0,0,0,0.22)
+- shadow-deep: 0 24px 80px rgba(0,0,0,0.34)
+- shadow-focus: 0 0 0 1px rgba(255,255,255,0.05), 0 18px 50px rgba(0,0,0,0.28)
+
+## Eixo de Retomada
+
+## Papel visual
+O Eixo de Retomada Ã© o centro da linguagem da oferta.
+
+Ele deve transmitir:
+- direÃ§Ã£o
+- alinhamento
+- estabilizaÃ§Ã£o
+- progresso possÃ­vel
+
+### Elementos do eixo
+- linha central dominante
+- glow controlado
+- nÃºcleo central/silhueta/forma abstrata
+- checkpoints orbitais:
+  - objetivo real
+  - nÃ­vel atual
+  - rotina possÃ­vel
+
+### Regra visual
+No inÃ­cio, a cena pode parecer levemente desalinhada.
+Mas nunca bagunÃ§ada.
+Tem que parecer â€œdesalinhamento inteligenteâ€, nÃ£o caos.
+
+## BotÃµes
+
+### CTA principal
+- cor base: accent-cta
+- texto forte
+- altura generosa
+- raio grande
+- sombra limpa
+- hover com leve lift
+- nunca competir com excesso de brilho ao redor
+
+### CTA secundÃ¡rio
+- fundo translÃºcido
+- borda suave
+- texto claro
+- hover com contraste levemente maior
+
+### Regra
+CTA sempre precisa ser facilmente identificado em menos de 1 segundo.
+
+## Ãcones e microdetalhes
+- usar pouco
+- simples
+- lineares ou sÃ³lidos discretos
+- nunca parecer kit genÃ©rico fitness
+- servir ao entendimento, nÃ£o decoraÃ§Ã£o
+
+## Blur, brilho e profundidade
+- blur deve ser leve e controlado
+- glow sÃ³ para reforÃ§ar eixo, foco ou sistema
+- evitar neon exagerado
+- profundidade deve vir mais de camadas do que de brilho
+
+## Estados interativos
+
+### Hover
+- leve elevaÃ§Ã£o
+- ajuste sutil de borda
+- micro aumento de contraste
+- nunca usar salto agressivo
+
+### Active
+- compressÃ£o mÃ­nima
+- reforÃ§o de foco
+
+### Focus
+- contorno elegante e visÃ­vel
+- acessÃ­vel
+- sem quebrar o visual premium
+
+## Motion visual bÃ¡sico
+Este arquivo nÃ£o define a coreografia completa.
+Mas toda UI deve aceitar:
+- fade
+- translate leve
+- scale contido
+- blur de entrada/saÃ­da
+- parallax em camadas
+
+## Regras para mobile
+- menos glow
+- menos profundidade exagerada
+- menos camadas simultÃ¢neas
+- mais contraste
+- mais legibilidade
+- menos elementos concorrendo
+
+## O que evitar
+- gradiente chamativo demais
+- neon gamer
+- look de dashboard SaaS genÃ©rico
+- textura demais
+- excesso de card
+- excesso de texto centralizado
+- excesso de borda brilhante
+- muito laranja fora dos CTAs
+- visual fitness clichÃª
+
+## CritÃ©rio de qualidade
+Se parecer:
+- template premium genÃ©rico, estÃ¡ errado
+- site gamer, estÃ¡ errado
+- landing fitness comum, estÃ¡ errado
+
+Se parecer:
+- sistema preciso
+- interface cara
+- direÃ§Ã£o clara
+- tensÃ£o virando controle
+entÃ£o estÃ¡ certo.

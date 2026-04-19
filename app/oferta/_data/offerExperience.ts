@@ -185,7 +185,7 @@ export const mechanismContent = {
   description:
     'Em vez de jogar um treino genérico na sua frente, o Forja Fit lê as variáveis certas, estabiliza o eixo e entrega um plano mais coerente para o seu momento.',
   systemLabel: 'Sistema Forja Progressiva',
-  systemTitle: 'Fenômeno ECR: Entrada Certa Responsiva',
+  systemTitle: 'Fenômeno ECR# — Entrada Certa Responsiva',
   systemStatus:
     'Objetivo, nível e rotina entram no sistema antes do plano pedir mais intensidade.',
   convergenceLabel: 'Convergência',

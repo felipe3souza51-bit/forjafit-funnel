@@ -1,145 +1,227 @@
 export type ProfileKey = 'recomeco' | 'emagrecimento' | 'evolucao';
 
+/* ── Image helpers ────────────────────────── */
+const U = (id: string, w = 800) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+/* ── Pain item ────────────────────────────── */
+export type PainItem = { title: string; sub: string };
+
+/* ── Transformation stat ─────────────────── */
+export type TransformationStat = { label: string; before: string; after: string };
+
+/* ── Transformation ──────────────────────── */
+export type Transformation = {
+  name: string;
+  age: number;
+  city: string;
+  weeks: string;
+  beforeQuote: string;
+  afterQuote: string;
+  stats: TransformationStat[];
+};
+
+/* ── FAQ ──────────────────────────────────── */
+export type FaqItem = { q: string; a: string };
+
+/* ── Profile images ──────────────────────── */
+export type ProfileImages = {
+  hero: string;
+  before: string;
+  after: string;
+};
+
+/* ── Full profile ────────────────────────── */
 export type ProfileContent = {
   shortLabel: string;
   angle: string;
   promise: string;
   highlight: string;
+  painTitle: string;
+  pains: PainItem[];
+  before: string;
+  after: string;
+  beforeMood: string;
+  afterMood: string;
+  transformation: Transformation;
+  images: ProfileImages;
   audience: string[];
-  transformationTitle: string;
-  transformationText: string;
-  beforeLabel: string;
-  beforeText: string;
-  afterLabel: string;
-  afterText: string;
-  faqs: { q: string; a: string }[];
+  audienceCount: number;
+  slotsLeft: number;
+  faqs: FaqItem[];
 };
 
 export const defaultProfileKey: ProfileKey = 'emagrecimento';
 
 export const offerProfiles: Record<ProfileKey, ProfileContent> = {
   recomeco: {
-    shortLabel: 'Recomeço com constância',
-    angle:
-      'Seu perfil mostra que o problema não é falta de vontade. É falta de um caminho claro para continuar.',
-    promise:
-      'Quando o plano cabe na sua realidade, treinar deixa de parecer uma obrigação pesada e começa a se tornar algo possível de manter.',
-    highlight:
-      'Menos culpa. Menos confusão. Mais clareza para voltar a agir de verdade.',
-    audience: [
-      'Para quem está recomeçando e precisa de um plano mais simples de seguir',
-      'Para quem quer sair da estagnação sem depender de motivação perfeita',
-      'Para quem precisa encaixar o treino na vida real com mais leveza',
+    shortLabel: 'Recomeçador',
+    angle: 'Seu perfil mostra que o problema não é falta de vontade. É falta de um caminho claro para continuar.',
+    promise: 'Quando o plano cabe na sua realidade, treinar deixa de parecer obrigação e começa a ser possível de manter.',
+    highlight: 'Menos culpa. Menos confusão. Mais clareza para voltar a agir de verdade.',
+    painTitle: 'Você já viveu isso. Várias vezes.',
+    pains: [
+      { title: 'Começa na segunda.', sub: 'Trava na quarta. Some na sexta.' },
+      { title: 'Guarda PDFs, salva vídeos.', sub: 'Nenhum vira rotina real.' },
+      { title: 'Volta ao zero.', sub: 'Sempre no mesmo ponto, há anos.' },
     ],
-    transformationTitle:
-      'O Forja Fit transforma o recomeço em uma rotina possível de seguir.',
-    transformationText:
-      'A proposta não é te pressionar com promessas irreais. É te dar estrutura para recuperar consistência, reduzir atrito e sentir evolução com mais clareza.',
-    beforeLabel: 'ANTES',
-    beforeText:
-      'Começa animado, trava no meio, perde ritmo e sente que está sempre voltando à estaca zero.',
-    afterLabel: 'DEPOIS',
-    afterText:
-      'Treina com mais clareza, encaixa melhor na rotina e começa a sentir constância como algo real.',
+    before: 'Começa animado. Trava no meio. Sente que está sempre voltando à estaca zero.',
+    after: 'Treina com clareza. Encaixa na rotina. Constância vira algo real.',
+    beforeMood: 'Semana 2. Mesma parede.',
+    afterMood: 'Semana 6. Outro trilho.',
+    transformation: {
+      name: 'Lucas R.', age: 34, city: 'Curitiba · PR',
+      weeks: '8 semanas',
+      beforeQuote: 'Achava que era falta de disciplina. Em 2 anos recomecei umas 11 vezes.',
+      afterQuote: 'Pela primeira vez não travei na semana 2. O plano se ajusta quando a semana aperta.',
+      stats: [
+        { label: 'treinos/mês', before: '3', after: '14' },
+        { label: 'semanas sem travar', before: '1,5', after: '7+' },
+      ],
+    },
+    images: {
+      hero: '/images/DEPOIS.png',
+      before: '/images/ANTES.png',
+      after: '/images/DEPOIS.png',
+    },
+    audience: [
+      'Recomeçando depois de meses (ou anos) parado',
+      'Precisa de estrutura, não de motivação',
+      'Encaixa treino na rotina real — não na ideal',
+    ],
+    audienceCount: 847,
+    slotsLeft: 34,
     faqs: [
-      {
-        q: 'Isso serve para quem está recomeçando do zero?',
-        a: 'Sim. Esse é justamente um dos perfis que mais se beneficiam de uma estrutura pronta: menos dúvida, menos atrito e mais chance de continuar.',
-      },
-      {
-        q: 'Preciso ter academia ou equipamentos?',
-        a: 'Não obrigatoriamente. A proposta é ter praticidade e flexibilidade, inclusive com opções mais compatíveis com a sua realidade.',
-      },
-      {
-        q: 'E se eu estiver sem constância há muito tempo?',
-        a: 'Esse é exatamente o ponto da recomendação: sair do improviso e ter um plano mais simples de seguir pode facilitar muito a retomada.',
-      },
+      { q: 'Serve pra quem está totalmente fora do ritmo?', a: 'Sim. É o perfil que mais se beneficia: menos dúvida, menos atrito, mais chance de continuar.' },
+      { q: 'Preciso de academia ou equipamento?', a: 'Não. O plano se ajusta à sua realidade — casa, academia, ou um híbrido.' },
+      { q: 'E se eu travar de novo?', a: 'O sistema prevê travas. O ponto não é não travar — é ter um caminho pra voltar sem recomeçar do zero.' },
     ],
   },
+
   emagrecimento: {
-    shortLabel: 'Emagrecimento com direção',
-    angle:
-      'Seu perfil mostra que você tende a evoluir melhor quando para de tentar no escuro e começa a seguir uma estrutura.',
-    promise:
-      'Quando você sabe exatamente o que fazer, o resultado deixa de parecer distante e começa a ficar muito mais possível.',
-    highlight:
-      'Mais organização, mais constância e mais chance real de ver resultado sem viver pulando de estratégia em estratégia.',
-    audience: [
-      'Para quem quer emagrecer com uma estrutura mais clara e prática',
-      'Para quem quer treinar sem perder tempo montando tudo sozinho',
-      'Para quem precisa de um plano mais ajustável à rotina real',
+    shortLabel: 'Emagrecimento',
+    angle: 'Seu perfil mostra que você evolui melhor quando para de tentar no escuro e passa a seguir uma estrutura.',
+    promise: 'Quando você sabe o que fazer, o resultado deixa de parecer distante e começa a ficar possível.',
+    highlight: 'Mais organização, mais constância e mais chance real de ver resultado.',
+    painTitle: 'Esforço sem direção não vira resultado.',
+    pains: [
+      { title: 'Tenta de tudo.', sub: 'Dieta, treino, app novo a cada mês.' },
+      { title: 'Se cobra pesado.', sub: 'E mesmo assim sente que não sai do lugar.' },
+      { title: 'A balança não responde.', sub: 'Porque o esforço não tem direção.' },
     ],
-    transformationTitle:
-      'O Forja Fit transforma intenção em direção — e direção em resultado possível.',
-    transformationText:
-      'A ideia não é te entregar mais conteúdo solto. É te colocar em movimento com um plano que organiza seu esforço, melhora sua consistência e aproxima seu corpo do resultado que você quer ver.',
-    beforeLabel: 'ANTES',
-    beforeText:
-      'Muita tentativa, muita informação, pouco direcionamento e sensação de esforço sem progresso claro.',
-    afterLabel: 'DEPOIS',
-    afterText:
-      'Mais estrutura, mais clareza no treino e uma rotina mais consistente para ver o corpo evoluir.',
+    before: 'Muita tentativa, muita informação, pouco direcionamento. Esforço sem progresso claro.',
+    after: 'Mais estrutura, mais clareza no treino e uma rotina mais consistente pra ver o corpo evoluir.',
+    beforeMood: '6 semanas. Mesma balança.',
+    afterMood: 'Mesmo esforço. Resultado diferente.',
+    transformation: {
+      name: 'Diego M.', age: 32, city: 'São Paulo · SP',
+      weeks: '10 semanas',
+      beforeQuote: 'Tentei de tudo. Dieta, app, personal online. Nada encaixava na minha semana real.',
+      afterQuote: 'A diferença é o plano entender que eu tenho família, trabalho, imprevisto. Não fui eu que mudei — foi o método.',
+      stats: [
+        { label: 'aderência semanal', before: '40%', after: '88%' },
+        { label: 'medidas reduzidas', before: '—', after: '−7cm' },
+      ],
+    },
+    images: {
+      hero: '/images/DEPOIS.png',
+      before: '/images/ANTES.png',
+      after: '/images/DEPOIS.png',
+    },
+    audience: [
+      'Quer emagrecer com uma estrutura clara',
+      'Não quer mais perder tempo montando tudo sozinho',
+      'Precisa de um plano que se ajuste à rotina real',
+    ],
+    audienceCount: 1204,
+    slotsLeft: 28,
     faqs: [
-      {
-        q: 'Isso é indicado para quem quer emagrecer e definir?',
-        a: 'Sim. Esse perfil atende justamente quem precisa de mais clareza, constância e organização para evoluir melhor.',
-      },
-      {
-        q: 'Preciso treinar todos os dias para fazer sentido?',
-        a: 'Não. A lógica aqui é facilitar consistência e execução dentro da sua rotina, não criar uma meta impossível de manter.',
-      },
-      {
-        q: 'Isso ajuda quem sente que se esforça, mas não sabe se está fazendo o certo?',
-        a: 'Sim. Um dos principais ganhos é trocar esforço solto por um caminho mais claro e orientado.',
-      },
+      { q: 'Isso é pra quem quer emagrecer e definir?', a: 'Sim. O perfil atende quem precisa de clareza, constância e organização pra evoluir.' },
+      { q: 'Preciso treinar todos os dias?', a: 'Não. A lógica é facilitar consistência, não criar uma meta impossível de manter.' },
+      { q: 'E se eu me esforço mas não sei se estou fazendo certo?', a: 'É exatamente isso que o sistema resolve: troca esforço solto por um caminho orientado.' },
     ],
   },
+
   evolucao: {
-    shortLabel: 'Evolução com estrutura',
-    angle:
-      'Seu perfil mostra que o seu próximo nível depende menos de motivação e mais de um sistema claro para evoluir.',
-    promise:
-      'O Forja Fit transforma esforço solto em uma rotina mais inteligente, organizada e muito mais consistente.',
-    highlight:
-      'Com o Forja Fit, seu treino ganha direção, seu esforço rende mais e sua evolução deixa de depender da sorte.',
-    audience: [
-      'Para quem quer evoluir com mais método e menos improviso',
-      'Para quem já tenta treinar, mas sente que falta direção',
-      'Para quem quer um plano mais estruturado para crescer com mais consistência',
+    shortLabel: 'Evolução',
+    angle: 'Seu perfil mostra que o próximo nível depende menos de motivação e mais de um sistema claro.',
+    promise: 'O Forja Fit transforma esforço solto em rotina inteligente, organizada e consistente.',
+    highlight: 'Seu treino ganha direção, seu esforço rende mais e sua evolução deixa de depender da sorte.',
+    painTitle: 'Treino constante não é treino com direção.',
+    pains: [
+      { title: 'Treina, mas improvisa.', sub: 'Segue sentimento, não método.' },
+      { title: 'Se esforça, mas estagna.', sub: 'Sem forma clara de medir progresso.' },
+      { title: 'Falta progressão real.', sub: 'Não porque treina pouco — treina errado.' },
     ],
-    transformationTitle:
-      'O Forja Fit transforma treino solto em evolução visível com mais método.',
-    transformationText:
-      'Você não precisa de mais caos, mais vídeos aleatórios ou mais tentativa desorganizada. Precisa de estrutura para fazer seu esforço render mais e sua rotina evoluir melhor.',
-    beforeLabel: 'ANTES',
-    beforeText:
-      'Treina, mas improvisa. Se esforça, mas nem sempre consegue medir progresso com clareza.',
-    afterLabel: 'DEPOIS',
-    afterText:
-      'Ganha direção, progressão e uma rotina muito mais consistente para evoluir de forma real.',
+    before: 'Treina, mas improvisa. Se esforça, mas nem sempre mede progresso com clareza.',
+    after: 'Ganha direção, progressão e uma rotina muito mais consistente pra evoluir de verdade.',
+    beforeMood: '12 meses. Mesmo peso na barra.',
+    afterMood: 'Mesma semana. Progresso medido.',
+    transformation: {
+      name: 'Rafael M.', age: 31, city: 'Belo Horizonte · MG',
+      weeks: '12 semanas',
+      beforeQuote: 'Treinava 5x por semana e sentia que andava em círculo. Sem forma de medir progresso.',
+      afterQuote: 'Em 3 semanas já tava treinando com mais método do que nos últimos 4 meses.',
+      stats: [
+        { label: 'carga agachamento', before: '80kg', after: '110kg' },
+        { label: 'progresso medido', before: 'nenhum', after: 'semanal' },
+      ],
+    },
+    images: {
+      hero: '/images/DEPOIS.png',
+      before: '/images/ANTES.png',
+      after: '/images/DEPOIS.png',
+    },
+    audience: [
+      'Quer evoluir com mais método e menos improviso',
+      'Já tenta treinar, mas sente falta de direção',
+      'Quer um plano estruturado pra crescer com consistência',
+    ],
+    audienceCount: 612,
+    slotsLeft: 19,
     faqs: [
-      {
-        q: 'Isso é bom para quem quer ganhar massa muscular?',
-        a: 'Sim. Esse perfil foi pensado justamente para quem responde melhor a uma estrutura mais progressiva e organizada.',
-      },
-      {
-        q: 'Já treino, mas sinto que estou estagnado. Ainda faz sentido?',
-        a: 'Faz. Muitas vezes o problema não é esforço, e sim falta de direção. É isso que essa proposta tenta resolver.',
-      },
-      {
-        q: 'Preciso ser avançado para aproveitar?',
-        a: 'Não. Você só precisa querer um caminho mais claro, estruturado e fácil de seguir com mais consistência.',
-      },
+      { q: 'É bom pra quem quer ganhar massa muscular?', a: 'Sim. O perfil foi pensado pra quem responde melhor a uma estrutura progressiva.' },
+      { q: 'Treino e sinto que estou estagnado. Faz sentido?', a: 'Faz. Muitas vezes o problema não é esforço — é falta de direção.' },
+      { q: 'Preciso ser avançado?', a: 'Não. Você só precisa querer um caminho mais claro e fácil de seguir.' },
     ],
   },
 };
 
+/* ── Testimonial avatars ─────────────────── */
+export const TESTIMONIAL_AVATARS: Record<string, string> = {
+  lucas: '/images/Lucas.jpeg',
+  camila: '/images/Camila.jpeg',
+  diego: '/images/Lucas.jpeg',
+  rafael: '/images/Rafael.jpeg',
+  marina: '/images/Marina.jpeg',
+};
+
+/* ── Testimonials ────────────────────────── */
+export const TESTIMONIALS = [
+  { name: 'Lucas R.', time: '14:32', text: 'Pela primeira vez não travei na semana 2.', day: 'hoje' },
+  { name: 'Camila S.', time: '09:17', text: 'Achei que era falta de disciplina. Era falta de plano.', day: 'hoje' },
+  { name: 'Rafael M.', time: '20:45', text: 'Em 3 semanas já tô treinando mais do que nos últimos 4 meses.', day: 'ontem' },
+  { name: 'Marina B.', time: '07:02', text: 'A diferença é que desta vez eu sei o próximo passo.', day: 'ontem' },
+];
+
+/* ── Mechanism (ECR) ─────────────────────── */
+export const MECHANISM = {
+  short: 'Método ECR',
+  full: 'Entrada Certa Responsiva',
+  line: 'O único sistema que começa pelo seu ponto real — não pelo ponto ideal do manual.',
+  steps: [
+    { code: 'E', label: 'Entrada', desc: 'Lê onde você está hoje. Sem romance, sem culpa.' },
+    { code: 'C', label: 'Certa', desc: 'Ajusta carga, volume e frequência ao seu momento real.' },
+    { code: 'R', label: 'Responsiva', desc: 'Recalibra semana a semana — o plano responde a você.' },
+  ],
+};
+
+/* ── Normalize helper ────────────────────── */
 export function normalizeProfileKey(
   value: string | null | undefined
 ): ProfileKey {
   if (value === 'recomeco' || value === 'emagrecimento' || value === 'evolucao') {
     return value;
   }
-
   return defaultProfileKey;
 }
