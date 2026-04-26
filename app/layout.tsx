@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Syne, DM_Sans } from 'next/font/google';
+import { DM_Sans, Montserrat, Open_Sans, Syne } from 'next/font/google';
 import './globals.css';
 import { UtmCapture } from '@/components/UtmCapture';
 
@@ -18,6 +18,20 @@ const dmSans = DM_Sans({
   display: 'swap',
 });
 
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['700', '800', '900'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Forja Fit Funnel',
   description: 'Funil low ticket para Forja Fit com quiz, resultado, oferta e bridge.'
@@ -25,7 +39,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${syne.variable} ${dmSans.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${syne.variable} ${dmSans.variable} ${montserrat.variable} ${openSans.variable}`}
+    >
       <head>
         <meta
           name="facebook-domain-verification"

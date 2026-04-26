@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     siteName: 'Forja Fit',
     images: [
       {
-        url: '/images/DEPOIS.png',
-        width: 1200,
-        height: 630,
-        alt: 'Forja Fit — Sistema responsivo de treino',
+        url: '/images/persona-primeiro-treino.png.png',
+        width: 1672,
+        height: 941,
+        alt: 'Forja Fit - Sistema responsivo de treino',
       },
     ],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Forja Fit · Entra no trilho certo',
     description: 'Para de recomeçar do zero. Plano alinhado ao seu objetivo, nível e rotina. R$67.',
-    images: ['/images/DEPOIS.png'],
+    images: ['/images/persona-primeiro-treino.png.png'],
   },
   robots: {
     index: true,
