@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { OfferPageStyles } from './OfferPageStyles';
+import './OfferPageStyles.css';
 import { pushEvent } from '@/lib/gtm';
 
 /* ─── Ticto ────────────────────────────────── */
@@ -50,6 +50,7 @@ const COMMENTS = [
 export function OfferPageClient() {
   const [stage, setStage]           = useState<'hidden' | 'comments' | 'full'>('hidden');
   const [hasStarted, setHasStarted] = useState(false);
+  const [progress, setProgress]     = useState(0);
   const proofRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const inView   = useInView(proofRef, { once: true, margin: '0px 0px -40px 0px' });
@@ -61,12 +62,15 @@ export function OfferPageClient() {
     setHasStarted(true);
   };
 
-  useEffect(() => {
-    pushEvent('view_oferta');
-    const t1 = setTimeout(() => setStage('comments'), 60_000);   // 60s → comments
-    const t2 = setTimeout(() => setStage('full'),     205_000);   // 3:25 → tudo
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const { currentTime, duration } = videoRef.current;
+    if (duration) setProgress((currentTime / duration) * 100);
+    if (currentTime >= 30 && stage === 'hidden') setStage('comments');
+    if (currentTime >= 214 && stage !== 'full') setStage('full');
+  };
+
+  useEffect(() => { pushEvent('view_oferta'); }, []);
 
   const showComments = stage === 'comments' || stage === 'full';
   const showFull     = stage === 'full';
@@ -111,11 +115,12 @@ export function OfferPageClient() {
               <video
                 ref={videoRef}
                 className="vsl-video"
-                src="/vsl.mp4.mp4"
+                src="/vsl.mp4"
                 poster="/images/DEPOIS.png"
                 playsInline
                 muted
                 preload="auto"
+                onTimeUpdate={handleTimeUpdate}
                 onContextMenu={(e) => e.preventDefault()}
               />
               <div
@@ -140,6 +145,11 @@ export function OfferPageClient() {
                   🔇 ATIVAR SOM
                 </button>
               )}
+              {hasStarted && (
+                <div className="vsl-progress-track">
+                  <div className="vsl-progress-fill" style={{ width: `${progress}%` }} />
+                </div>
+              )}
             </div>
           </div>
 
@@ -155,7 +165,7 @@ export function OfferPageClient() {
         </div>
       </section>
 
-      {/* ══ COMENTÁRIOS (60s) ════════════════ */}
+      {/* ══ COMENTÁRIOS (30s video) ══════════ */}
       {showComments && (
         <div className={`reveal ${showComments ? 'show' : ''}`}>
           <section className="sp-comments" aria-label="Comentários">
@@ -185,7 +195,7 @@ export function OfferPageClient() {
         </div>
       )}
 
-      {/* ══ B3–B8 só aparecem em stage 'full' ══ */}
+      {/* ══ B3–B8 só aparecem em stage 'full' (214s) ══ */}
 
       {/* ══ B3 — BENEFÍCIOS ══════════════════ */}
       <div className={`reveal ${showFull ? 'show' : ''}`}>
@@ -406,7 +416,6 @@ export function OfferPageClient() {
         FORJAFIT · © 2026 · sistema responsivo de treino
       </footer>
 
-      <OfferPageStyles />
     </main>
   );
 }
