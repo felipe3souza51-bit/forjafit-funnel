@@ -1,759 +1,408 @@
 'use client';
 
-import { useState, useEffect, useRef, type SyntheticEvent } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { OfferPageStyles } from './OfferPageStyles';
 import { pushEvent } from '@/lib/gtm';
 
-/* ─── constants ───────────────────────────── */
-const CTA   = '/checkout-bridge';
-const LABEL = 'Começar agora por R$67';
-const STAGE_1_SECONDS = 260;
-const STAGE_2_SECONDS = 420;
-const STAGE_3_SECONDS = 600;
-const REVEAL_STAGE_STORAGE_KEY = 'forjaFitRevealStage';
-const LEGACY_CTA_UNLOCK_STORAGE_KEY = 'forjaFitCtaUnlocked';
-const VSL_EVENT_DATA = {
-  page: 'oferta',
-  video: 'forja-fit-vsl',
-};
+/* ─── Ticto ────────────────────────────────── */
+const TICTO = 'https://checkout.ticto.app/O151D598F?pid=AFCA5C514F';
+const CTA_ATTRS = { href: TICTO, target: '_blank', rel: 'noopener noreferrer' } as const;
 
-type RevealStage = 1 | 2 | 3 | 4;
-
-type OfferTrackingEvent =
-  | 'vsl_play'
-  | 'vsl_pause'
-  | 'vsl_25'
-  | 'vsl_50'
-  | 'vsl_75'
-  | 'vsl_complete'
-  | 'cta_revealed'
-  | 'cta_click';
-
-const VSL_MILESTONES = [
-  { progress: 0.25, event: 'vsl_25' },
-  { progress: 0.5, event: 'vsl_50' },
-  { progress: 0.75, event: 'vsl_75' },
-] satisfies Array<{ progress: number; event: OfferTrackingEvent }>;
-
-function pushOfferTrackingEvent(event: OfferTrackingEvent) {
-  pushEvent(event, VSL_EVENT_DATA);
-}
-
-function parseRevealStage(value: string | null): RevealStage {
-  const stage = Number(value);
-  return stage === 2 || stage === 3 || stage === 4 ? stage : 1;
-}
-
-function formatVideoTime(seconds: number) {
-  if (!Number.isFinite(seconds) || seconds <= 0) return '0:00';
-
-  const totalSeconds = Math.floor(seconds);
-  const minutes = Math.floor(totalSeconds / 60);
-  const remainingSeconds = totalSeconds % 60;
-
-  return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
-}
-
-/* ─── static data ─────────────────────────── */
-const TESTIMONIALS = [
-  { avatar: '/images/Lucas.jpeg',  name: 'Lucas R.',  time: '14:32', text: 'Pela primeira vez não travei na semana 2.' },
-  { avatar: '/images/Rafael.jpeg', name: 'Rafael M.', time: '20:45', text: 'Em 3 semanas já tô treinando com mais método do que nos últimos 4 meses.' },
-  { avatar: '/images/Marina.jpeg', name: 'Marina B.', time: '07:02', text: 'A diferença é que desta vez eu sei o próximo passo.' },
-];
-
-const INCLUDES = [
-  'Mapa de Progressão Inicial calibrado pro seu momento',
-  'Treinos por objetivo — secar, definir ou retomar o ritmo',
-  'Fichas prontas para casa e academia',
-  'Vídeo-aulas de execução com segurança',
-  'Recalibragem semanal — o plano se adapta',
-  'Materiais extras + bônus complementares',
-];
-
-const FAQS = [
-  { q: 'Funciona pra quem está totalmente parado?',  a: 'Sim. É exatamente pra esse momento. O sistema começa do seu ponto real, sem pressupor nada.' },
-  { q: 'Preciso de academia?',                        a: 'Não. Casa, academia ou híbrido. O plano se adapta à estrutura que você tem.' },
-  { q: 'E se eu travar de novo?',                     a: 'O sistema prevê travas. Você não recomeça do zero — retoma de onde parou, com ajuste.' },
-  { q: 'Quanto tempo até ver resultado?',             a: 'Depende do ponto de partida. A maioria sente direção e clareza desde o primeiro dia.' },
-  { q: 'E se não funcionar?',                         a: 'Garantia de 15 dias. Devolvemos 100%. Sem perguntas, sem burocracia.' },
-];
-
-/* ─── animated counter ────────────────────── */
-function Counter({ target, inView }: { target: number; inView: boolean }) {
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    const start = performance.now();
-    const dur = 1600;
-    let raf: number;
-    const tick = (now: number) => {
-      const p = Math.min((now - start) / dur, 1);
-      setN(Math.round((1 - Math.pow(1 - p, 3)) * target));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, target]);
-  return <>{n.toLocaleString('pt-BR')}</>;
-}
-
-/* ─── reveal wrapper ──────────────────────── */
-function Reveal({ stage, currentStage, className = '', children, id, style }: {
-  stage: RevealStage; currentStage: RevealStage; className?: string;
-  children: React.ReactNode; id?: string; style?: React.CSSProperties;
+function CtaBtn({ label = 'COMEÇAR AGORA POR R$67 →', size = 'default', event = 'cta_click' }: {
+  label?: string; size?: 'default' | 'large'; event?: string;
 }) {
-  if (currentStage < stage) return null;
-
-  const cls = `reveal-section is-revealed ${className}`.trim();
-  return <div className={cls} id={id} style={style}>{children}</div>;
+  return (
+    <a {...CTA_ATTRS} className={`cta-btn ${size === 'large' ? 'cta-btn--lg' : ''}`} onClick={() => pushEvent(event)}>
+      {label}
+    </a>
+  );
 }
 
-/* ══════════════════════════════════════════
+/* ─── icons ─────────────────────────────────── */
+const IcoBook = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+  </svg>
+);
+const IcoCal = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+);
+const IcoTarget = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+  </svg>
+);
+
+/* ─── comments data ──────────────────────────── */
+const COMMENTS = [
+  { user: 'joao_p',    initial: 'J', ago: 'há 12 min', text: 'caraca, nunca tinha pensado dessa forma. faz total sentido' },
+  { user: 'rafa.costa', initial: 'R', ago: 'há 23 min', text: '11 anos tentando e travando igual descrito. agora entendi' },
+  { user: 'diego_m',   initial: 'D', ago: 'há 34 min', text: 'finalmente alguém falando a real, sem mimimi de guru' },
+  { user: 'lucasf',    initial: 'L', ago: 'há 1h',     text: 'assistindo de novo pra ter certeza. tô dentro' },
+];
+
+/* ══════════════════════════════════════════════
    PAGE
-══════════════════════════════════════════ */
+══════════════════════════════════════════════ */
 export function OfferPageClient() {
-  const [currentStage, setCurrentStage] = useState<RevealStage>(1);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [videoCurrentTime, setVideoCurrentTime] = useState(0);
-  const [videoDuration, setVideoDuration] = useState(0);
-  const proofRef  = useRef<HTMLDivElement>(null);
+  const [stage, setStage]           = useState<'hidden' | 'comments' | 'full'>('hidden');
+  const [hasStarted, setHasStarted] = useState(false);
+  const proofRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const maxAllowedTimeRef = useRef(0);
-  const lastTimeUpdateAtRef = useRef(0);
-  const isCorrectingSeekRef = useRef(false);
-  const stageThresholdsRef = useRef({
-    stage2: STAGE_1_SECONDS,
-    stage3: STAGE_2_SECONDS,
-    stage4: STAGE_3_SECONDS,
-  });
-  const trackedEventsRef = useRef<Set<OfferTrackingEvent>>(new Set());
-  const trackedStagesRef = useRef<Set<RevealStage>>(new Set());
-  const inView    = useInView(proofRef, { once: true, margin: '0px 0px -40px 0px' });
-  const progressPercent = videoDuration > 0
-    ? Math.min((videoCurrentTime / videoDuration) * 100, 100)
-    : 0;
+  const inView   = useInView(proofRef, { once: true, margin: '0px 0px -40px 0px' });
 
-  const trackOnce = (event: OfferTrackingEvent) => {
-    if (trackedEventsRef.current.has(event)) return;
-
-    trackedEventsRef.current.add(event);
-    pushOfferTrackingEvent(event);
-  };
-
-  const trackCtaClick = (legacyEvent: string) => {
-    pushOfferTrackingEvent('cta_click');
-    pushEvent(legacyEvent);
-  };
-
-  const trackStageReveal = (stage: RevealStage) => {
-    if (trackedStagesRef.current.has(stage)) return;
-
-    trackedStagesRef.current.add(stage);
-    pushEvent('vsl_stage_revealed', {
-      stage,
-      page: 'oferta',
-    });
-  };
-
-  const persistStage = (stage: RevealStage) => {
-    try {
-      const savedStage = parseRevealStage(localStorage.getItem(REVEAL_STAGE_STORAGE_KEY));
-      if (stage > savedStage) {
-        localStorage.setItem(REVEAL_STAGE_STORAGE_KEY, String(stage));
-      }
-    } catch {
-      // localStorage can be unavailable in private or restricted browsers.
-    }
-  };
-
-  const revealStage = (stage: RevealStage) => {
-    setCurrentStage((previousStage) => (stage > previousStage ? stage : previousStage));
-    persistStage(stage);
-    trackStageReveal(stage);
-
-    if (stage === 4) {
-      trackOnce('cta_revealed');
-    }
-  };
-
-  const revealStagesUntil = (stage: RevealStage) => {
-    for (let nextStage = 2; nextStage <= stage; nextStage += 1) {
-      revealStage(nextStage as RevealStage);
-    }
-  };
-
-  const getStageFromWatchedTime = (watchedSeconds: number): RevealStage => {
-    const { stage2, stage3, stage4 } = stageThresholdsRef.current;
-
-    if (watchedSeconds >= stage4) return 4;
-    if (watchedSeconds >= stage3) return 3;
-    if (watchedSeconds >= stage2) return 2;
-    return 1;
-  };
-
-  const syncStagesWithWatchedTime = (watchedSeconds: number) => {
-    const watchedStage = getStageFromWatchedTime(watchedSeconds);
-
-    if (watchedStage > currentStage) {
-      revealStagesUntil(watchedStage);
-    }
-  };
-
-  const correctSeek = (video: HTMLVideoElement) => {
-    const allowedTime = maxAllowedTimeRef.current;
-
-    isCorrectingSeekRef.current = true;
-    video.currentTime = allowedTime;
-    setVideoCurrentTime(allowedTime);
-
-    window.requestAnimationFrame(() => {
-      isCorrectingSeekRef.current = false;
-    });
-  };
-
-  const handleVideoLoadedMetadata = (event: SyntheticEvent<HTMLVideoElement>) => {
-    const video = event.currentTarget;
-    const duration = Number.isFinite(video.duration) ? video.duration : 0;
-
-    setVideoDuration(duration);
-    setVideoCurrentTime(video.currentTime);
-    maxAllowedTimeRef.current = Math.max(maxAllowedTimeRef.current, video.currentTime);
-    lastTimeUpdateAtRef.current = performance.now();
-  };
-
-  const handleVideoPlay = () => {
-    lastTimeUpdateAtRef.current = performance.now();
-    setIsPlaying(true);
-    trackOnce('vsl_play');
-  };
-
-  const handleVideoPause = (event: SyntheticEvent<HTMLVideoElement>) => {
-    setIsPlaying(false);
-
-    if (!event.currentTarget.ended) {
-      trackOnce('vsl_pause');
-    }
-  };
-
-  const handleVideoTimeUpdate = (event: SyntheticEvent<HTMLVideoElement>) => {
-    const video = event.currentTarget;
-    const currentTime = video.currentTime;
-    const now = performance.now();
-
-    if (!Number.isFinite(video.duration) || video.duration <= 0) {
-      return;
-    }
-
-    if (isCorrectingSeekRef.current) {
-      setVideoCurrentTime(maxAllowedTimeRef.current);
-      return;
-    }
-
-    const elapsedSinceLastTick = lastTimeUpdateAtRef.current
-      ? (now - lastTimeUpdateAtRef.current) / 1000
-      : 0;
-    const playbackRate = Number.isFinite(video.playbackRate) && video.playbackRate > 0
-      ? video.playbackRate
-      : 1;
-    const allowedNaturalAdvance = video.paused
-      ? 0.35
-      : Math.max(1.25, elapsedSinceLastTick * playbackRate + 0.75);
-    const isTryingToAdvance = currentTime > maxAllowedTimeRef.current + allowedNaturalAdvance;
-    const isTryingToGoBack = currentTime < maxAllowedTimeRef.current - 0.35;
-
-    if (isTryingToAdvance || isTryingToGoBack) {
-      correctSeek(video);
-      lastTimeUpdateAtRef.current = now;
-      return;
-    }
-
-    maxAllowedTimeRef.current = Math.max(maxAllowedTimeRef.current, currentTime);
-    lastTimeUpdateAtRef.current = now;
-    setVideoCurrentTime(currentTime);
-    setVideoDuration(video.duration);
-    syncStagesWithWatchedTime(currentTime);
-
-    const watchedProgress = currentTime / video.duration;
-
-    VSL_MILESTONES.forEach((milestone) => {
-      if (watchedProgress >= milestone.progress) {
-        trackOnce(milestone.event);
-      }
-    });
-  };
-
-  const handleVideoSeeking = (event: SyntheticEvent<HTMLVideoElement>) => {
-    if (isCorrectingSeekRef.current) return;
-
-    const video = event.currentTarget;
-
-    if (Math.abs(video.currentTime - maxAllowedTimeRef.current) > 0.25) {
-      correctSeek(video);
-    }
-  };
-
-  const handleVideoEnded = (event: SyntheticEvent<HTMLVideoElement>) => {
-    const video = event.currentTarget;
-
-    setIsPlaying(false);
-    setVideoCurrentTime(video.currentTime);
-    setVideoDuration(Number.isFinite(video.duration) ? video.duration : videoCurrentTime);
-    maxAllowedTimeRef.current = Math.max(maxAllowedTimeRef.current, video.currentTime);
-    syncStagesWithWatchedTime(video.currentTime);
-    VSL_MILESTONES.forEach((milestone) => trackOnce(milestone.event));
-    trackOnce('vsl_complete');
-  };
-
-  const toggleVideoPlayback = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      void video.play();
-      return;
-    }
-
-    video.pause();
-  };
-
-  const toggleVideoMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const nextMuted = !video.muted;
-    video.muted = nextMuted;
-    setIsMuted(nextMuted);
+  const handleStart = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = false;
+    videoRef.current.play().catch(() => null);
+    setHasStarted(true);
   };
 
   useEffect(() => {
     pushEvent('view_oferta');
-
-    const searchParams = new URLSearchParams(window.location.search);
-    const showAll = searchParams.get('showAll') === '1';
-    const resetReveal = searchParams.get('resetReveal') === '1';
-    const delayParam = searchParams.get('delay');
-    const delayOverride = delayParam === null ? NaN : Number(delayParam);
-    const hasDelayOverride = Number.isFinite(delayOverride) && delayOverride >= 0;
-    const firstStageDelay = hasDelayOverride ? delayOverride : STAGE_1_SECONDS;
-
-    stageThresholdsRef.current = {
-      stage2: firstStageDelay,
-      stage3: hasDelayOverride ? firstStageDelay * 2 : STAGE_2_SECONDS,
-      stage4: hasDelayOverride ? firstStageDelay * 3 : STAGE_3_SECONDS,
-    };
-
-    if (resetReveal) {
-      try {
-        localStorage.removeItem(REVEAL_STAGE_STORAGE_KEY);
-        localStorage.removeItem(LEGACY_CTA_UNLOCK_STORAGE_KEY);
-      } catch {
-        // localStorage can be unavailable in private or restricted browsers.
-      }
-    }
-
-    const storedStage = (() => {
-      try {
-        return resetReveal ? 1 : parseRevealStage(localStorage.getItem(REVEAL_STAGE_STORAGE_KEY));
-      } catch {
-        return 1;
-      }
-    })();
-
-    trackStageReveal(1);
-
-    if (showAll) {
-      revealStagesUntil(4);
-      return;
-    }
-
-    revealStagesUntil(storedStage);
+    const t1 = setTimeout(() => setStage('comments'), 60_000);   // 60s → comments
+    const t2 = setTimeout(() => setStage('full'),     205_000);   // 3:25 → tudo
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
-  return (
-    <main className="sales-page">
+  const showComments = stage === 'comments' || stage === 'full';
+  const showFull     = stage === 'full';
 
-      {/* ══ NAVBAR ═══════════════════════════ */}
-      <nav className="offer-nav" aria-label="Forja Fit">
-        <div className="offer-nav-inner">
-          <span className="offer-logo">FORJA<span style={{ color: 'var(--accent)', opacity: 0.55 }}>FIT</span></span>
-          <div className="access-badge">
-            <span style={{ display: 'block', width: 7, height: 7, borderRadius: '50%', background: 'var(--accent-support)', flexShrink: 0 }} />
-            <span>Método ECR</span>
-          </div>
+  return (
+    <main className="sp">
+
+      {/* ══ B1 — URGENCY BAR ══════════════════ */}
+      <div className="urgency-bar">
+        ⚠️ ATENÇÃO: 93% dos homens travam no treino. Esse vídeo mostra por quê.
+      </div>
+
+      {/* ══ B1 — NAVBAR ══════════════════════ */}
+      <nav className="sp-nav">
+        <div className="sp-nav-inner">
+          <span className="sp-logo">FORJA<span className="sp-logo-accent">FIT</span></span>
+          {showFull && <span className="sp-badge">● Acesso imediato</span>}
         </div>
       </nav>
 
-      {/* ══ HERO + VSL ═══════════════════════ */}
-      <section className="hero-section">
+      {/* ══ B2 — HERO + VSL ══════════════════ */}
+      <section className="hero">
         <div className="container">
-          <p className="hero-eyebrow">
-            <span aria-hidden="true" />
-            MÉTODO ECR — ENTRADA CERTA RESPONSIVA
-            <span aria-hidden="true" />
+          <p className="eyebrow">
+            <span className="eyebrow-line" aria-hidden="true" />
+            MÉTODO ECR — DESCOBERTO POR ACIDENTE
+            <span className="eyebrow-line" aria-hidden="true" />
           </p>
 
-          <h1 className="hero-headline">
-            <span>Pare de recomeçar</span>
-            <span>do zero.</span>
-            <span className="headline-gap" aria-hidden="true" />
-            <span>
-              Descubra a{' '}
-              <strong className="headline-accent">progressão certa</strong>
-            </span>
-            <span>para o seu corpo.</span>
+          <h1 className="hero-h1">
+            Por Que 93% Dos Homens Travam No Treino{' '}
+            <span className="accent-orange">Antes Da Semana 3</span>
           </h1>
 
-          <p className="hero-proof-line">
-            847 pessoas começaram o Forja Fit nos últimos 7 dias.
+          <p className="hero-sub">
+            Não é falta de disciplina. É falta de ponto de partida certo. Descubra o método que tirou 847 homens do ciclo de começa-e-para — sem academia cara, sem rotina perfeita, sem motivação heroica.
           </p>
 
-          <p className="hero-subtitle">
-            O Sistema Forja Progressiva alinha seu objetivo, seu nível atual e
-            sua rotina real para mostrar o começo certo na era do treino
-            genérico.
-          </p>
-
-          <div className="vsl-frame">
+          <div className="vsl-wrap">
             <div className="vsl-alert">🔊 ATENÇÃO: Aperte o Play e Aumente o Volume</div>
-            <video
-              ref={videoRef}
-              className="vsl-video"
-              src="/vsl-forja-fit.mp4"
-              poster="/images/persona-primeiro-treino.png.png"
-              playsInline
-              preload="metadata"
-              controls={false}
-              controlsList="nodownload noplaybackrate noremoteplayback"
-              disablePictureInPicture
-              tabIndex={-1}
-              onContextMenu={(event) => event.preventDefault()}
-              onLoadedMetadata={handleVideoLoadedMetadata}
-              onPlay={handleVideoPlay}
-              onPause={handleVideoPause}
-              onTimeUpdate={handleVideoTimeUpdate}
-              onSeeking={handleVideoSeeking}
-              onEnded={handleVideoEnded}
-            />
-
-            <div className="vsl-custom-controls" aria-label="Controles do vídeo">
-              <button
-                type="button"
-                className="vsl-control-button"
-                onClick={toggleVideoPlayback}
-                aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+            <div className="vsl-container">
+              <video
+                ref={videoRef}
+                className="vsl-video"
+                src="/vsl.mp4.mp4"
+                poster="/images/DEPOIS.png"
+                playsInline
+                muted
+                preload="auto"
+                onContextMenu={(e) => e.preventDefault()}
+              />
+              <div
+                className={`vsl-play-overlay${hasStarted ? ' vsl-play-overlay--hidden' : ''}`}
+                onClick={handleStart}
+                role="button"
+                aria-label="Reproduzir vídeo"
               >
-                {isPlaying ? 'Pausar' : 'Play'}
-              </button>
-
-              <button
-                type="button"
-                className="vsl-control-button vsl-control-button-secondary"
-                onClick={toggleVideoMute}
-                aria-label={isMuted ? 'Ativar som' : 'Silenciar vídeo'}
-              >
-                {isMuted ? 'Som' : 'Mudo'}
-              </button>
-
-              <div className="vsl-progress-row">
-                <div
-                  className="vsl-progress-track"
-                  aria-label={`Progresso do vídeo: ${Math.round(progressPercent)}%`}
-                >
-                  <span
-                    className="vsl-progress-fill"
-                    style={{ width: `${progressPercent}%` }}
-                  />
+                <div className="vsl-play-btn">
+                  <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
+                    <circle cx="40" cy="40" r="38" stroke="rgba(255,255,255,0.9)" strokeWidth="2"/>
+                    <polygon points="32,24 60,40 32,56" fill="white"/>
+                  </svg>
                 </div>
-                <span className="vsl-time">
-                  {formatVideoTime(videoCurrentTime)} / {formatVideoTime(videoDuration)}
-                </span>
               </div>
+              {!hasStarted && (
+                <button
+                  className="vsl-unmute-btn"
+                  onClick={handleStart}
+                  aria-label="Ativar som e reproduzir"
+                >
+                  🔇 ATIVAR SOM
+                </button>
+              )}
             </div>
           </div>
 
-          <p
-            className={`video-watch-note ${
-              currentStage >= 4 ? 'is-unlocked' : ''
-            }`}
-          >
-            {currentStage >= 4
-              ? 'Condição liberada: acesso imediato por R$67.'
-              : 'Assista ao vídeo para liberar a próxima parte.'}
-          </p>
-
-          <Reveal stage={4} currentStage={currentStage} className="hero-checkout-reveal" style={{ textAlign: 'center' }}>
-            <Link href={CTA} className="cta-button cta-large" onClick={() => trackCtaClick('cta_hero')}>
-              {LABEL}
-            </Link>
-            <p className="microcopy">Acesso imediato · Garantia de 15 dias · Checkout seguro</p>
-          </Reveal>
+          {/* hero CTA — só aparece em stage 'full' */}
+          {showFull ? (
+            <div className="reveal show">
+              <CtaBtn size="large" event="cta_hero" />
+              <p className="microcopy">acesso imediato · 15 dias de garantia · checkout seguro</p>
+            </div>
+          ) : (
+            <p className="hero-watch-hint">Assista o vídeo até o final pra entender o método</p>
+          )}
         </div>
       </section>
 
-      {/* ══ DOR (260s) ════════════════════════ */}
-      <Reveal stage={2} currentStage={currentStage} className="pain-section">
-        <div className="container">
-          <h2>Você Já Se Perguntou Por Que Já Tentou Tantas Vezes?</h2>
-
-          <div className="pain-copy">
-            <p>Você baixou o app. Montou a planilha. Comprou o whey.</p>
-            <p>Começou na segunda cheio de energia.</p>
-            <p>Na quarta, o treino já pesava. Na sexta, você pulou.</p>
-            <p>Na outra segunda… recomeçou do zero.</p>
-            <div className="copy-pause" />
-            <p>E a pior parte não é parar.</p>
-            <p className="pain-voice">É a voz na cabeça dizendo que você é fraco.</p>
-            <div className="copy-pause" />
-            <p className="pain-question">Mas e se o problema nunca foi você?</p>
-            <div className="copy-pause" />
-            <p>O problema é que você tentou seguir um treino feito para outra pessoa. Outra rotina. Outro nível. Outro objetivo.</p>
-            <p className="pain-close">Quando o começo está errado, não existe disciplina que salve.</p>
-          </div>
-
-          {currentStage >= 4 && (
-            <div className="section-delayed-cta">
-              <Link href={CTA} className="cta-button" onClick={() => trackCtaClick('cta_pain')}>
-                DESCOBRIR O COMEÇO CERTO →
-              </Link>
-            </div>
-          )}
-        </div>
-      </Reveal>
-
-      {/* ══ MECANISMO ECR (260s) ══════════════ */}
-      <Reveal stage={2} currentStage={currentStage} className="mechanism-section">
-        <div className="container">
-          <h2>O Método ECR. Entrada Certa, Não Entrada Ideal.</h2>
-          <p className="section-subtitle">O único sistema que começa pelo seu ponto real — não pelo ponto ideal do manual.</p>
-
-          <div className="ecr-stack">
-            <div className="ecr-card ecr-card-e">
-              <span className="ecr-letter">E</span>
-              <h3>Entrada</h3>
-              <p>Descobre onde você está de verdade. Sem ego, sem chute, sem comparação.</p>
-            </div>
-            <div className="ecr-card ecr-card-c">
-              <span className="ecr-letter">C</span>
-              <h3>Certa</h3>
-              <p>Monta um plano que cabe na sua semana real — não na semana perfeita que não existe.</p>
-            </div>
-            <div className="ecr-card ecr-card-r">
-              <span className="ecr-letter">R</span>
-              <h3>Responsiva</h3>
-              <p>O plano se ajusta quando a vida aperta. Você não para — o sistema recalibra.</p>
-            </div>
-          </div>
-
-          <p className="mechanism-highlight">
-            "É como alinhar os trilhos antes de acelerar o trem. A maioria tenta correr mais rápido em trilho torto — e chama a queda de falta de disciplina."
-          </p>
-
-          {currentStage >= 4 && (
-            <div className="section-delayed-cta">
-              <Link href={CTA} className="cta-button" onClick={() => trackCtaClick('cta_mech')}>
-                {LABEL} →
-              </Link>
-            </div>
-          )}
-        </div>
-      </Reveal>
-
-      {/* ══ PROVA SOCIAL (420s) ══════════════ */}
-      <Reveal stage={3} currentStage={currentStage} className="proof-section">
-        <div className="container" ref={proofRef}>
-          <h2>Resultados Reais. Gente Comum.</h2>
-
-          {/* transformation card */}
-          <div className="transformation-card">
-            <div className="person-bar">
-              <Image
-                src="/images/Lucas.jpeg"
-                alt="Foto de Lucas R., aluno Forja Fit"
-                width={1024}
-                height={1024}
-              />
-              <div>
-                <strong>Lucas R., 34</strong>
-                <span>Curitiba · PR</span>
-              </div>
-              <span className="week-badge">8 semanas</span>
+      {/* ══ COMENTÁRIOS (60s) ════════════════ */}
+      {showComments && (
+        <div className={`reveal ${showComments ? 'show' : ''}`}>
+          <section className="sp-comments" aria-label="Comentários">
+            <div className="sp-comments-header">
+              <span className="sp-comments-dot" aria-hidden="true" />
+              <span className="sp-comments-count">847 pessoas assistindo agora</span>
             </div>
 
-            <div className="before-after-grid">
-              <figure>
-                <Image
-                  src="/images/ANTES.png"
-                  alt="Antes do aluno Forja Fit"
-                  width={512}
-                  height={512}
-                />
-                <figcaption>
-                  <span className="before-label">ANTES</span>
-                  <span>"Semana 2. Mesma parede."</span>
-                </figcaption>
-              </figure>
-              <figure>
-                <Image
-                  src="/images/DEPOIS.png"
-                  alt="Depois do aluno Forja Fit"
-                  width={512}
-                  height={512}
-                />
-                <figcaption>
-                  <span className="after-label">DEPOIS</span>
-                  <span>"Semana 8. Outro trilho."</span>
-                </figcaption>
-              </figure>
-            </div>
-
-            <div className="stats-row">
-              <div className="stat-box">
-                <span>treinos/mês</span>
-                <strong><small>3</small>→<span style={{ color: 'var(--accent)', fontSize: 22, fontFamily: 'var(--font-display)', fontWeight: 800 }}>14</span></strong>
-              </div>
-              <div className="stat-box">
-                <span>semanas sem travar</span>
-                <strong><small>1,5</small>→<span style={{ color: 'var(--accent)', fontSize: 22, fontFamily: 'var(--font-display)', fontWeight: 800 }}>7+</span></strong>
-              </div>
-            </div>
-            <p className="disclaimer">* resultados variam conforme dedicação e rotina</p>
-          </div>
-
-          {/* testimonials */}
-          <div className="testimonial-stack">
-            {TESTIMONIALS.map((t, i) => (
+            {COMMENTS.map((c, i) => (
               <motion.div
-                key={t.name}
-                className="testimonial-card"
-                initial={{ opacity: 0, y: 10 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
+                key={c.user}
+                className="sp-comment"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.12 }}
               >
-                <Image
-                  src={t.avatar}
-                  alt={`Foto de ${t.name}, depoimento Forja Fit`}
-                  width={1024}
-                  height={1024}
-                />
+                <div className="sp-comment-avatar">{c.initial}</div>
                 <div>
-                  <header>
-                    <strong>{t.name}</strong>
-                    <span>{t.time}</span>
-                  </header>
-                  <p>{t.text}</p>
+                  <p className="sp-comment-meta">
+                    <span className="sp-comment-user">@{c.user}</span> · {c.ago}
+                  </p>
+                  <p className="sp-comment-text">{c.text}</p>
                 </div>
               </motion.div>
             ))}
-          </div>
-
-          <div className="live-counter">
-            <span aria-hidden="true" />
-            <b><Counter target={847} inView={inView} /></b>&nbsp;pessoas começaram nos últimos 7 dias
-          </div>
-
-          {currentStage >= 4 && (
-            <div className="section-delayed-cta">
-              <Link href={CTA} className="cta-button" onClick={() => trackCtaClick('cta_proof')}>
-                {LABEL} →
-              </Link>
-            </div>
-          )}
+          </section>
         </div>
-      </Reveal>
+      )}
 
-      {/* ══ OFERTA + PREÇO (600s) ═════════════ */}
-      <Reveal stage={4} currentStage={currentStage} className="offer-section" id="oferta">
-        <div className="container">
-          <h2>Tudo Isso Por Um Preço Que Não Faz Sentido</h2>
+      {/* ══ B3–B8 só aparecem em stage 'full' ══ */}
 
-          <div className="offer-card">
-            <div className="offer-line" aria-hidden="true" />
-            <span className="launch-badge">CONDIÇÃO DE LANÇAMENTO</span>
+      {/* ══ B3 — BENEFÍCIOS ══════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="benefits-section">
+          <div className="container">
+            <p className="eyebrow"><span className="eyebrow-line" />O QUE MUDA NA SUA VIDA<span className="eyebrow-line" /></p>
+            <h2 className="section-h">Não É Sobre Treinar Mais. É Sobre Começar Certo.</h2>
+            <div className="benefit-stack">
+              <div className="benefit-card benefit-card--orange">
+                <h3>Você sai do ciclo de começa-e-para</h3>
+                <p>Plano alinhado ao seu momento real elimina a frustração que faz você largar.</p>
+              </div>
+              <div className="benefit-card benefit-card--cyan">
+                <h3>Funciona na sua rotina, não na ideal</h3>
+                <p>20 minutos no ponto certo rendem mais que 1 hora no ponto errado.</p>
+              </div>
+              <div className="benefit-card benefit-card--green">
+                <h3>Constância sem depender de motivação</h3>
+                <p>O sistema recalibra quando a semana aperta — você não para, ajusta.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
-            <ul className="offer-list">
-              {INCLUDES.map((item, i) => (
-                <li key={i}><span>✓</span> {item}</li>
+      {/* ══ B4 — PROVA SOCIAL ════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="proof-section" ref={proofRef}>
+          <div className="container">
+            <p className="eyebrow"><span className="eyebrow-line" />RESULTADOS REAIS<span className="eyebrow-line" /></p>
+            <h2 className="section-h">847 Homens Já Saíram Do Ciclo. Veja Quem.</h2>
+
+            <div className="transform-card">
+              <div className="person-bar">
+                <img className="person-avatar" src="/images/Lucas.jpeg" alt="Lucas R." />
+                <div className="person-info">
+                  <strong>Lucas R., 34</strong>
+                  <span>Curitiba · PR</span>
+                </div>
+                <span className="week-badge">8 semanas</span>
+              </div>
+
+              <div className="ba-grid">
+                <figure className="ba-figure">
+                  <img src="/images/ANTES.png" alt="Antes" loading="lazy" />
+                  <figcaption>
+                    <span className="ba-label ba-label--before">ANTES</span>
+                    <span className="ba-mood">"Semana 2. Mesma parede."</span>
+                  </figcaption>
+                </figure>
+                <figure className="ba-figure">
+                  <img src="/images/DEPOIS.png" alt="Depois" loading="lazy" />
+                  <figcaption>
+                    <span className="ba-label ba-label--after">DEPOIS</span>
+                    <span className="ba-mood">"Semana 8. Outro trilho."</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div className="stats-row">
+                <div className="stat-box">
+                  <span>treinos/mês</span>
+                  <div className="stat-val"><s>3</s><strong>14</strong></div>
+                </div>
+                <div className="stat-box">
+                  <span>semanas sem travar</span>
+                  <div className="stat-val"><s>1,5</s><strong>7+</strong></div>
+                </div>
+              </div>
+              <p className="disclaimer">* resultados variam conforme dedicação e rotina</p>
+            </div>
+
+            <div className="testi-stack">
+              {([
+                { img: '/images/Lucas.jpeg',  name: 'Lucas R.',  time: '14:32', text: 'Pela primeira vez não travei na semana 2.' },
+                { img: '/images/Rafael.jpeg', name: 'Rafael M.', time: '20:45', text: 'Em 3 semanas já tô treinando com mais método do que nos últimos 4 meses.' },
+                { img: '/images/Marina.jpeg', name: 'Marina B.', time: '07:02', text: 'A diferença é que desta vez eu sei o próximo passo.' },
+              ] as const).map((t, i) => (
+                <motion.div
+                  key={t.name}
+                  className="testi-card"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                >
+                  <img className="testi-avatar" src={t.img} alt={t.name} />
+                  <div className="testi-body">
+                    <div className="testi-meta">
+                      <strong>{t.name}</strong>
+                      <span>{t.time}</span>
+                    </div>
+                    <p>{t.text}</p>
+                  </div>
+                </motion.div>
               ))}
-            </ul>
-
-            <div className="dashed-divider" />
-
-            <div className="price-block">
-              <span className="old-price">De R$127</span>
-              <strong><span>R$</span>67</strong>
-              <small>à vista ou 12× no cartão</small>
             </div>
 
-            <Link href={CTA} className="cta-button cta-large" onClick={() => trackCtaClick('cta_offer')}>
-              {LABEL} →
-            </Link>
-
-            <div className="secure-row">
-              <span>🔒 Checkout seguro · Ticto</span>
-              <span>🛡 Dados criptografados</span>
+            <div className="live-pill">
+              <span className="live-dot" aria-hidden="true" />
+              847 pessoas começaram nos últimos 7 dias
             </div>
 
-            <div className="scarcity-pill">
-              <span aria-hidden="true" />
-              Vagas abertas essa semana: <strong>&nbsp;34</strong>
+            <CtaBtn label="QUERO O MESMO RESULTADO →" event="cta_proof" />
+          </div>
+        </section>
+      </div>
+
+      {/* ══ B5 — OFERTA ══════════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="offer-section">
+          <div className="container">
+            <p className="eyebrow"><span className="eyebrow-line" />TUDO O QUE VOCÊ RECEBE<span className="eyebrow-line" /></p>
+            <h2 className="section-h">O Sistema Completo Forja Fit</h2>
+
+            <div className="offer-card">
+              <div className="offer-top-line" aria-hidden="true" />
+              <span className="launch-badge">CONDIÇÃO DE LANÇAMENTO</span>
+
+              <ul className="offer-list">
+                {[
+                  'Mapa de Progressão Inicial — seu ponto real de partida',
+                  'Treinos por objetivo — secar, definir, retomar',
+                  'Fichas prontas — casa e academia',
+                  'Vídeo-aulas de execução',
+                  'Sistema de recalibragem semanal',
+                  'Materiais extras + bônus complementares',
+                ].map((item, i) => (
+                  <li key={i}><span className="check-green">✓</span>{item}</li>
+                ))}
+              </ul>
+
+              <div className="dashed-sep" />
+
+              <div className="price-block">
+                <span className="price-old">De R$127</span>
+                <div className="price-main"><span className="price-cur">R$</span>67</div>
+                <span className="price-sub">à vista ou 12× no cartão</span>
+              </div>
+
+              <CtaBtn size="large" event="cta_offer" />
+
+              <p className="offer-meta">Checkout seguro · Ticto · Dados protegidos</p>
+
+              <div className="scarcity-pill">
+                <span className="live-dot" aria-hidden="true" />
+                Vagas abertas essa semana: <strong>34</strong>
+              </div>
             </div>
           </div>
-        </div>
-      </Reveal>
+        </section>
+      </div>
 
-      {/* ══ GARANTIA + FAQ + FINAL CTA (600s) ═ */}
-      <Reveal stage={4} currentStage={currentStage} className="final-section">
-        <div className="container">
-
-          {/* guarantee */}
-          <div className="guarantee-box">
-            <Image
-              src="/images/garantia.png.png"
-              alt="Selo de garantia de 15 dias Forja Fit"
-              width={300}
-              height={261}
-            />
-            <div>
-              <h3>Garantia Total de 15 Dias — Risco Zero</h3>
-              <p>Entre, teste, aplique. Se nos primeiros 15 dias você não sentir que é diferente de tudo que já tentou, devolvemos 100% do seu dinheiro. Sem perguntas. Sem burocracia.</p>
+      {/* ══ B6 — GARANTIA ════════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="guarantee-section">
+          <div className="container">
+            <div className="guarantee-box">
+              <img className="guarantee-img" src="/images/garantia.png.png" alt="Garantia 15 dias" />
+              <div className="guarantee-copy">
+                <p className="eyebrow guarantee-eyebrow"><span className="eyebrow-line" />GARANTIA TOTAL</p>
+                <h3>15 Dias de Garantia Incondicional</h3>
+                <p>Entre. Teste. Aplique por 15 dias. Se você não sentir que é completamente diferente de tudo que já tentou, devolvemos 100% do seu dinheiro. Sem perguntas. Sem formulário. O risco é todo meu.</p>
+              </div>
             </div>
           </div>
+        </section>
+      </div>
 
-          {/* faq */}
-          <h2 style={{ textAlign: 'center', marginBottom: 20 }}>Perguntas Frequentes</h2>
-          <div className="faq-list">
-            {FAQS.map((f, i) => (
-              <details key={i} className="faq-item">
-                <summary><span>0{i + 1}</span>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
+      {/* ══ B7 — BÔNUS ════════════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="bonus-section">
+          <div className="container">
+            <p className="eyebrow"><span className="eyebrow-line" />BÔNUS EXCLUSIVOS DE LANÇAMENTO<span className="eyebrow-line" /></p>
+            <h2 className="section-h">Mais 3 Bônus Pra Garantir Sua Constância</h2>
+            <p className="section-sub">Materiais complementares enviados por e-mail logo após a compra.</p>
+
+            <div className="bonus-grid">
+              {([
+                { ico: <IcoBook />, title: 'Guia da Recalibragem Semanal', text: 'Como ajustar o plano nos dias em que a vida apertar — sem perder progresso.', val: 'R$47' },
+                { ico: <IcoCal />,  title: 'Calendário de 90 Dias do Recomeçador', text: 'Os primeiros 3 meses mapeados em fases, com checkpoints reais de progresso.', val: 'R$67' },
+                { ico: <IcoTarget />, title: 'Manual da Constância', text: 'Os 7 erros que travam o recomeçador — e como evitar todos.', val: 'R$37' },
+              ] as const).map((b, i) => (
+                <div key={i} className="bonus-card">
+                  <div className="bonus-ico">{b.ico}</div>
+                  <h4>{b.title}</h4>
+                  <p>{b.text}</p>
+                  <span className="bonus-val"><s>{b.val}</s></span>
+                </div>
+              ))}
+            </div>
+
+            <div className="bonus-total">
+              <p>Valor real total dos bônus: <span className="muted-line">R$151</span></p>
+              <p className="bonus-price">Você paga apenas: <strong>R$67</strong></p>
+            </div>
           </div>
+        </section>
+      </div>
 
-          {/* final CTA */}
-          <div className="final-cta">
-            <h2>
-              Chega de recomeçar.
-              <span>Entra no trilho certo.</span>
+      {/* ══ B8 — CTA FINAL ═══════════════════ */}
+      <div className={`reveal ${showFull ? 'show' : ''}`}>
+        <section className="final-section">
+          <div className="final-glow" aria-hidden="true" />
+          <div className="container">
+            <h2 className="final-h">
+              Chega de Recomeçar.<br />
+              <span>Entra No Trilho Certo.</span>
             </h2>
-            <Link href={CTA} className="cta-button cta-large" onClick={() => trackCtaClick('cta_final')}>
-              {LABEL} →
-            </Link>
-            <p className="microcopy">acesso imediato · 15 dias de garantia · checkout Ticto</p>
-            <div className="live-counter final-counter">
-              <span aria-hidden="true" />
-              847 homens já começaram. Você é o próximo?
-            </div>
+            <p className="final-sub">847 homens já começaram. Daqui 3 meses, você quer estar onde?</p>
+            <CtaBtn size="large" event="cta_final" />
+            <p className="microcopy" style={{ marginTop: 12 }}>acesso imediato · 15 dias de garantia · checkout Ticto</p>
           </div>
-        </div>
-      </Reveal>
+        </section>
+      </div>
 
-      {/* ══ FOOTER ═══════════════════════════ */}
-      <footer className="offer-footer">
+      {/* ══ FOOTER ════════════════════════════ */}
+      <footer className="sp-footer">
         FORJAFIT · © 2026 · sistema responsivo de treino
       </footer>
 
