@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import './OfferPageStyles.css';
+import Hls from 'hls.js';
 import { pushEvent } from '@/lib/gtm';
 
 /* ─── Ticto ────────────────────────────────── */
@@ -72,6 +73,25 @@ export function OfferPageClient() {
 
   useEffect(() => { pushEvent('view_oferta'); }, []);
 
+  const VSL_HLS_URL = 'https://vz-cc6db17f-2e8.b-cdn.net/10af5444-b93a-4f9f-bba3-bb1187375c13/playlist.m3u8';
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = VSL_HLS_URL;
+      return;
+    }
+
+    if (Hls.isSupported()) {
+      const hls = new Hls({ enableWorker: true, lowLatencyMode: false });
+      hls.loadSource(VSL_HLS_URL);
+      hls.attachMedia(video);
+      return () => hls.destroy();
+    }
+  }, []);
+
   const showComments = stage === 'comments' || stage === 'full';
   const showFull     = stage === 'full';
 
@@ -115,7 +135,6 @@ export function OfferPageClient() {
               <video
                 ref={videoRef}
                 className="vsl-video"
-                src="/vsl.mp4"
                 poster="/images/DEPOIS.png"
                 playsInline
                 muted
