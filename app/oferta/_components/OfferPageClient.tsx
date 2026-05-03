@@ -10,11 +10,11 @@ import { pushEvent } from '@/lib/gtm';
 const TICTO = 'https://checkout.ticto.app/O151D598F?pid=AFCA5C514F';
 const CTA_ATTRS = { href: TICTO, target: '_blank', rel: 'noopener noreferrer' } as const;
 
-function CtaBtn({ label = 'COMEÇAR AGORA POR R$67 →', size = 'default', event = 'cta_click' }: {
-  label?: string; size?: 'default' | 'large'; event?: string;
+function CtaBtn({ label = 'COMEÇAR AGORA POR R$67 →', size = 'default', event = 'cta_click', onCheckout }: {
+  label?: string; size?: 'default' | 'large'; event?: string; onCheckout?: () => void;
 }) {
   return (
-    <a {...CTA_ATTRS} className={`cta-btn ${size === 'large' ? 'cta-btn--lg' : ''}`} onClick={() => pushEvent(event)}>
+    <a {...CTA_ATTRS} className={`cta-btn ${size === 'large' ? 'cta-btn--lg' : ''}`} onClick={() => { pushEvent(event); onCheckout?.(); }}>
       {label}
     </a>
   );
@@ -91,6 +91,17 @@ export function OfferPageClient() {
       return () => hls.destroy();
     }
   }, []);
+
+  const handleCheckoutClick = () => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout', {
+        content_name: 'Forja Fit',
+        content_category: 'fitness',
+        value: 67.00,
+        currency: 'BRL'
+      });
+    }
+  };
 
   const showComments = stage === 'comments' || stage === 'full';
   const showFull     = stage === 'full';
@@ -175,7 +186,7 @@ export function OfferPageClient() {
           {/* hero CTA — só aparece em stage 'full' */}
           {showFull ? (
             <div className="reveal show">
-              <CtaBtn size="large" event="cta_hero" />
+              <CtaBtn size="large" event="cta_hero" onCheckout={handleCheckoutClick} />
               <p className="microcopy">acesso imediato · 15 dias de garantia · checkout seguro</p>
             </div>
           ) : (
@@ -317,7 +328,7 @@ export function OfferPageClient() {
               847 pessoas começaram nos últimos 7 dias
             </div>
 
-            <CtaBtn label="QUERO O MESMO RESULTADO →" event="cta_proof" />
+            <CtaBtn label="QUERO O MESMO RESULTADO →" event="cta_proof" onCheckout={handleCheckoutClick} />
           </div>
         </section>
       </div>
@@ -354,7 +365,7 @@ export function OfferPageClient() {
                 <span className="price-sub">à vista ou 12× no cartão</span>
               </div>
 
-              <CtaBtn size="large" event="cta_offer" />
+              <CtaBtn size="large" event="cta_offer" onCheckout={handleCheckoutClick} />
 
               <p className="offer-meta">Checkout seguro · Ticto · Dados protegidos</p>
 
@@ -424,7 +435,7 @@ export function OfferPageClient() {
               <span>Entra No Trilho Certo.</span>
             </h2>
             <p className="final-sub">847 homens já começaram. Daqui 3 meses, você quer estar onde?</p>
-            <CtaBtn size="large" event="cta_final" />
+            <CtaBtn size="large" event="cta_final" onCheckout={handleCheckoutClick} />
             <p className="microcopy" style={{ marginTop: 12 }}>acesso imediato · 15 dias de garantia · checkout Ticto</p>
           </div>
         </section>
